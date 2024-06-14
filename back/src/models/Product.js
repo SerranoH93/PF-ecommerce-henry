@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('dog', {
+    sequelize.define('product', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
@@ -16,41 +16,44 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        image: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: 'URL required'
+                    msg: 'Description required'
                 }
             }
         },
-        height: {
+        price: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: 'Height required'
+                    msg: 'Price require'
                 }
             }
         },
-        weight: {
+        gender: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: 'Weight required'
+                    msg: 'Gender required'
                 }
             }
         },
-        life_span: {
+        stock: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: 'Weight required'
+                    msg: 'Stock required'
                 }
             }
         }
-    }, { timestamps: false });
+    }, { 
+        timestamps: false,
+        paranoid: true
+    });
 };

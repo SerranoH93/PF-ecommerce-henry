@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 
+
 module.exports = (sequelize) => {
-    sequelize.define('temperament', {
+    sequelize.define('category', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -17,5 +18,8 @@ module.exports = (sequelize) => {
                 }
             }
         }        
-    }, { timestamps: false });
+    }, { 
+        timestamps: false,
+        paranoid: true
+    });
 };
