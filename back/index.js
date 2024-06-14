@@ -1,5 +1,9 @@
-const express = require('express')
-const app = express()
-const port = 3000;
-app.listen(port)
-console.log("Server on port", port)
+const server = require('./src/app.js');
+const { conn } = require('./src/db.js');
+
+// Syncing all the models at once.
+conn.sync({ force: true }).then(() => {
+    server.listen(3001, () => {
+        console.log('%s listening at 3001'); // eslint-disable-line no-console
+    });
+});
