@@ -8,4 +8,40 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
-module.exports = cloudinary;
+const uploadImage = async (model, uniqueField, fileBuffer) => {
+    const result = await new Promise((res, rej) => {
+        const options = {};
+
+        switch (model) {
+            case 'product':
+                options.public_id = `${uniqueField}_id`;
+                options.folder = 'products';
+                break;
+            // Agrega más modelos aquí cuando si es
+            
+            default:
+                return rej(new Error('Unsupported model type'));
+        }
+
+        cloudinary.uploader
+            .upload_stream(
+                {
+                    ...options,
+                    overwrite: true,
+                },
+                (error, uploadResult) => {
+                    if (error) {
+                        return rej(error);
+                    }
+
+                    return res(uploadResult);
+                }
+            )
+            .end(fileBuffer);
+    });
+
+    return result;
+    
+};
+
+module.exports = uploadImage;
