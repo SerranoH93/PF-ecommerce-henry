@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const newProductSchema = require('../validations/newProductSchema');
 const validateImages = require('../validations/filesValidations');
 
-
 const getAllProducts = async (req, res) => {
     res.status(200).json("Hola get all products");
 }
@@ -32,8 +31,8 @@ const postNewProduct = async (req, res) => {
             });
         }
 
+        //* Si las validaciones son correctas se agregan los datos a la DB
         req.body.id =crypto.randomUUID();
-
         const files = req.files;        
         const uniqueField = req.body.id;
         const imagesUrl = [];
@@ -42,8 +41,7 @@ const postNewProduct = async (req, res) => {
             const fileBuffer = file.buffer;
             const result = await uploadImage('product', uniqueField, fileBuffer);
             imagesUrl.push(result.secure_url);
-        }      
-
+        }
         // console.log(req.body, 'req')
 
         const newProduct = await Product.create({
