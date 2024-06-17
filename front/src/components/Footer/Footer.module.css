@@ -1,0 +1,73 @@
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+}
+
+.footerTop {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactForm input,
+.contactForm textarea {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.contactForm button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footerMiddle {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footerColumns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.column {
+    width: 18%;
+    padding: 10px;
+}
+
+.socialColumn {
+    width: 25%;
+    padding: 10px;
+}
+
+.socialIcons,
+.paymentIcons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.socialIcons a,
+.payment-icons img {
+    margin: 5px;
+}
+
+.paymentIcons img {
+    width: 50px;
+    height: auto;
+}
