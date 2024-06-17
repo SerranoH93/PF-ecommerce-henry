@@ -18,7 +18,15 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={Style.footer}>
-      <div className={Style.footerTop}>
+      
+      <div className={Style.footerMiddle}>
+        <div className={Style.footerColumns}>
+          <div className={Style.column}>Acerca de</div>
+          <div className={Style.column}>Otros sitios</div>
+          <div className={Style.column}>Column 3</div>
+          <div className={Style.column}>Column 4</div>
+          <div className={Style.socialColumn}>
+            <div className={Style.footerTop}>
         <h2>Contact Us</h2>
         <form onSubmit={handleSubmit(onSubmit)} className={Style.contactForm}>
           <input 
@@ -35,14 +43,7 @@ const Footer: React.FC = () => {
           <button type="submit">Send</button>
         </form>
       </div>
-      <div className={Style.footerMiddle}>
-        <div className={Style.footerColumns}>
-          <div className={Style.column}>Column 1</div>
-          <div className={Style.column}>Column 2</div>
-          <div className={Style.column}>Column 3</div>
-          <div className={Style.column}>Column 4</div>
-          <div className={Style.socialColumn}>
-            <div>Follow Us</div>
+      <div>No te olvides de seguirnos en</div>
             <div className={Style.socialIcons}>
               <a href="#">Facebook</a>
               <a href="#">Twitter</a>
