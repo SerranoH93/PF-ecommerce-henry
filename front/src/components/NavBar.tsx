@@ -3,15 +3,20 @@ import SearchBar from '@/components/SearchBar'
 
 export default function navBar() {
     return (
-        <nav className="flex">
-            <div className="flex">
+        <nav className="">
+            <div className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
                 <Link href='/'>
                     Logo
                 </Link>
 
                 <SearchBar />
 
-                <ul>
+                <ul className="flex gap-5">
+                    <li>
+                        <Link href='/crear'>
+                            Crear
+                        </Link>
+                    </li>
                     <li>
                         <Link href='/login'>
                             Login
@@ -25,8 +30,8 @@ export default function navBar() {
                 </ul>
             </div>
 
-            <div>
-                <ul>
+            <div className="flex">
+                <ul className="flex gap-8">
                     <li>
                         <Link href="/">
                             Home
