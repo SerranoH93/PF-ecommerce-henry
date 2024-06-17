@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Style from './Footer.module.css'
+import Image from 'next/image';
 
 interface ContactFormInputs {
   email: string;
@@ -50,12 +51,36 @@ const Footer: React.FC = () => {
             </div>
             <div>Payments</div>
             <div className={Style.paymentIcons}>
-              <img src="/path/to/visa.png" alt="Visa" />
-              <img src="/path/to/mastercard.png" alt="MasterCard" />
-              <img src="/path/to/amex.png" alt="American Express" />
-              <img src="/path/to/paypal.png" alt="PayPal" />
-              <img src="/path/to/applepay.png" alt="Apple Pay" />
-              <img src="/path/to/googlepay.png" alt="Google Pay" />
+              <Image 
+              src="/path/to/visa.png" 
+              width={38} 
+              height={24}  
+              alt="Visa" />
+              <Image 
+              width={38}  
+              height={24}
+              src="/path/to/mastercard.png"
+              alt="MasterCard" />
+              <Image 
+              src="/path/to/amex.png" 
+              width={38}  
+              height={24}
+              alt="American Express" />
+              <Image 
+              src="/path/to/paypal.png"
+              width={38}  
+              height={24}
+              alt="PayPal" />
+              <Image 
+              src="/path/to/applepay.png"
+              width={38}  
+              height={24}
+              alt="Apple Pay" />
+              <Image 
+              src="/path/to/googlepay.png" 
+              width={38}  
+              height={24} 
+              alt="Google Pay" />
             </div>
           </div>
         </div>
