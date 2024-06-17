@@ -37,12 +37,14 @@ const postNewProduct = async (req, res) => {
         const uniqueField = req.body.id;
         const imagesUrl = [];
 
-        for (const file of files) {
-            const fileBuffer = file.buffer;
-            const result = await uploadImage('product', uniqueField, fileBuffer);
+        console.log(files, 'imagenes')
+
+        for (let i = 0; i < files.length; i++) {
+            const fileBuffer = files[i].buffer;
+            const result = await uploadImage('product', uniqueField, fileBuffer, i);
             imagesUrl.push(result.secure_url);
         }
-        // console.log(req.body, 'req')
+        console.log(imagesUrl, 'images')
 
         const newProduct = await Product.create({
             id: req.body.id,

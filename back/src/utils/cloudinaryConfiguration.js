@@ -8,14 +8,15 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
-const uploadImage = async (model, uniqueField, fileBuffer) => {
+const uploadImage = async (model, uniqueField, fileBuffer, index) => {
     const result = await new Promise((res, rej) => {
         const options = {};
 
         switch (model) {
             case 'product':
-                options.public_id = `${uniqueField}_id`;
+                options.public_id = `${uniqueField}_id_${index}`;
                 options.folder = 'products';
+                options.unique_filename = false;
                 break;
             // Agrega más modelos aquí cuando si es
             
