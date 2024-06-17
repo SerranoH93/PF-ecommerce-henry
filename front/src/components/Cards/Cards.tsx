@@ -8,7 +8,7 @@ interface Product {
   id: number;
   name: string;
   price: number;
-  imageUrl: string;
+  images: string;
 }
 
 const Cards: React.FC = () => {
@@ -17,7 +17,7 @@ const Cards: React.FC = () => {
 
   useEffect(() => {
     // Aquí deberíamos reemplazar la URL por la de tu API real
-    fetch('https://api.example.com/products')
+    fetch('http://localhost:3002/products/')
       .then(response => response.json())
       .then(data => {
         setProducts(data);
@@ -26,12 +26,14 @@ const Cards: React.FC = () => {
       .catch(error => {
         console.error('Error fetching products:', error);
         setLoading(false);
-      });
+      });      
   }, []);
 
   if (loading) {
     return <p>Loading...</p>;
   }
+
+  console.log(products, 'Productos')
 
   return (
     <div className={Style.cardContainer}>
@@ -41,7 +43,7 @@ const Cards: React.FC = () => {
           id={product.id}
           name={product.name}
           price={product.price}
-          imageUrl={product.imageUrl}
+          imageUrl={product.images[0]}
         />
       ))}
     </div>
