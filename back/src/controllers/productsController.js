@@ -3,9 +3,16 @@ const uploadImage = require('../utils/cloudinaryConfiguration');
 const crypto = require('crypto');
 const newProductSchema = require('../validations/newProductSchema');
 const validateImages = require('../validations/filesValidations');
+const { Op, where } = require('sequelize');
 
 const getAllProducts = async (req, res) => {
-    res.status(200).json("Hola get all products");
+    try {
+        const productsDB = await Product.findAll({ include: Category })
+        res.status(200).json(productsDB);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+    
 }
 
 
@@ -63,9 +70,34 @@ const postNewProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }     
+}
+
+const deleteProduct = async (req, res) => {
+    const productId = req.params.id;
+
+    try {        
+        const product = await Product.findByPk(productId);
+        console.log(product)
+
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        } else {
+            await Product.destroy({where: {
+                id: product.id
+            }});
+            res.status(200).json({ message: 'Producto eliminado exitosamente' });
+        }    
+
+        
+
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
     }
+}
 
 module.exports = {
         getAllProducts,
-        postNewProduct
+        postNewProduct,
+        deleteProduct
     };
