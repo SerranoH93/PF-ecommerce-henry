@@ -22,7 +22,7 @@ const postNewProduct = async (req, res) => {
         } 
 
         //* Validar si la imagen cumple con los formatos y tamaños requeridos
-        console.log(req.files);
+        // console.log(req.files);
         const validationResult = validateImages(req.files);
 
         if (!validationResult.valid) {
@@ -58,7 +58,7 @@ const postNewProduct = async (req, res) => {
             images: imagesUrl
         })    
         
-        console.log(newProduct);
+        // console.log(newProduct);
         res.status(200).json('Se creo nuevo producto'); 
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

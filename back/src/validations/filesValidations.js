@@ -8,7 +8,7 @@ const supportedImageFormats = [
 function validateImages(files) {
     const errors = [];
 
-    console.log(files, "validacion")
+    // console.log(files, "validacion")
 
     files.forEach((file, index) => {
         if (!file || !file.mimetype) {
