@@ -1,30 +1,49 @@
-import React from "react";
-import ProductCard from "../Card/Card";
+import React, { useEffect, useState } from 'react';
+import Card from '@/components/Card/Card'
+import Style from "./Cards.module.css";
 
+
+// interface ProductContainerProps{
+//   products: Product[];
+// }
 interface Product {
   id: number;
   name: string;
-  size: string;
-  color: string;
   price: number;
   imageUrl: string;
 }
 
-interface ProductContainerProps{
-  products: Product[];
-}
 
-// Componente contenedor de productos
-const ProductContainer: React.FC<ProductContainerProps> = ({ products }) => {
+
+const Cards: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Aquí deberías reemplazar la URL por la de tu API real
+    fetch('https://api.example.com/products')
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <div className="product-container">
+    <div className="card-container">
       {products.map(product => (
-        <ProductCard 
+        <Card
           key={product.id}
           id={product.id}
           name={product.name}
-          size={product.size}
-          color={product.color}
           price={product.price}
           imageUrl={product.imageUrl}
         />
@@ -33,4 +52,4 @@ const ProductContainer: React.FC<ProductContainerProps> = ({ products }) => {
   );
 };
 
-export default ProductContainer;
+export default Cards;

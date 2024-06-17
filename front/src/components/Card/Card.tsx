@@ -2,21 +2,19 @@ import React from 'react';
 import styles from './Card.module.css'
 import ButtonCart from '@/components/ButtonCart/ButtonCart'
 
-interface Product {
+ interface ProductCard {
   id: number;
   name: string;
-  size: string;
-  color: string;
   price: number;
   imageUrl: string;
 }
 
 
-const ProductCard: React.FC<Product> = ({ id, name, price, imageUrl }) => {
+ const Card: React.FC<ProductCard> = ({ id, name, price, imageUrl }) => {
     return (
       <div className={styles.card} key={id}>
         <div className={styles.imageContainer}>
-          <img src="https://i.ibb.co/LZzKHF2/porsche-zoom2-1.jpg" alt={name} className="image" />
+          <img src={imageUrl} alt={name} className="image" />
         </div>
         <div className={styles.title}>
           <h2 className={styles.productName}>{name}TERRIBLE AUTITO</h2>
@@ -31,4 +29,4 @@ const ProductCard: React.FC<Product> = ({ id, name, price, imageUrl }) => {
     );
   };
 
-  export default ProductCard
+export default Card
