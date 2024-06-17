@@ -9,51 +9,39 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Name required'
-                }
-            }
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Description required'
-                }
-            }
+            allowNull: false
         },
         price: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Price require'
-                }
-            }
+            type: DataTypes.FLOAT,
+            allowNull: false
         },
         gender: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Gender required'
-                }
-            }
+            allowNull: false
         },
         stock: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Stock required'
-                }
-            }
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true            
+        },
+        size: {
+            type: DataTypes.INTEGER,//  DataTypes.JSON,
+            allowNull: true,
+            // defaultValue: {}            
+        },
+        images: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
         }
     }, { 
-        timestamps: false,
+        
         paranoid: true
     });
 };

@@ -11,15 +11,10 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: {
-                    msg: 'Name required'
-                }
-            }
+            allowNull: false
         }        
     }, { 
-        timestamps: false,
+        
         paranoid: true
     });
 };
