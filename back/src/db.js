@@ -30,18 +30,45 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product } = sequelize.models;
-const { Category } = sequelize.models;
+const { 
+    Product, 
+    Category, 
+    Notification, 
+    Order, 
+    OrderDetail, 
+    Review, 
+    ShoppingCart, 
+    User 
+} = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 
-//! Relación de muchos a muchos entre Product and Category
-Product.belongsToMany(Category, { through: 'product_category' });
+//* Aca vendrian las relaciones
+User.hasMany(Order, { foreignKey: 'user_id' });
+Order.belongsTo(User, { foreignKey: 'user_id' });
 
-//! Relación de muchos a muchos entre Category and Product
-Category.belongsToMany(Product, { through: 'product_category' });
+Category.hasMany(Product, { foreignKey: 'category_id' });
+Product.belongsTo(Category, { foreignKey: 'category_id' });
 
+Order.hasMany(OrderDetail, { foreignKey: 'order_id' });
+OrderDetail.belongsTo(Order, { foreignKey: 'order_id' });
+
+Product.hasMany(OrderDetail, { foreignKey: 'product_id' });
+OrderDetail.belongsTo(Product, { foreignKey: 'product_id' });
+
+User.hasMany(Review, { foreignKey: 'user_id' });
+Review.belongsTo(User, { foreignKey: 'user_id' });
+
+Product.hasMany(Review, { foreignKey: 'product_id' });
+Review.belongsTo(Product, { foreignKey: 'product_id' });
+
+User.hasMany(ShoppingCart, { foreignKey: 'user_id' });
+ShoppingCart.belongsTo(User, { foreignKey: 'user_id' });
+
+Product.hasMany(ShoppingCart, { foreignKey: 'product_id' });
+ShoppingCart.belongsTo(Product, { foreignKey: 'product_id' });
+
+User.hasMany(Notification, { foreignKey: 'user_id' });
+Notification.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
