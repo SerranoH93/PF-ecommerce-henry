@@ -1,7 +1,12 @@
+// "use client"
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Style from './Footer.module.css'
 import Image from 'next/image';
+import LogoFace from '@/assets/LogoFace.png'
+import LogoX from '@/assets/XLogo.png'
+import LogoIg from '@/assets/logoIG.webp'
+import LogoLinkedIn from '@/assets/LinkedIn.webp'
 
 interface ContactFormInputs {
   email: string;
@@ -23,8 +28,62 @@ const Footer: React.FC = () => {
         <div className={Style.footerColumns}>
           <div className={Style.column}>Acerca de</div>
           <div className={Style.column}>Otros sitios</div>
-          <div className={Style.column}>Column 3</div>
-          <div className={Style.column}>Column 4</div>
+          <div className={Style.column}>
+            <h2>Categorias</h2>
+            <ul>
+              <li><a href="">Hombres</a></li>
+              <li><a href="">Mujeres</a></li>
+              <li><a href="">Niños y Niñas</a></li>
+              <li><a href="">Accesorios</a></li>
+            </ul>
+          </div>
+          <div className={Style.column}>
+            <h2>Seguinos en nuestras Redes</h2>
+            {/* <li> */}
+              <a href="#">
+                <Image 
+                  className={Style.socialMediaImages} 
+                  src={LogoFace} 
+                  alt="Facebook Logo" 
+                  width={24} 
+                  height={24} 
+                />
+              </a>
+            {/* </li>
+            <li> */}
+              <a href="#">
+                <Image 
+                  className={Style.socialMediaImages} 
+                  src={LogoX} 
+                  alt="X Logo" 
+                  width={24} 
+                  height={24} 
+                />
+              </a>
+            {/* </li> */}
+            {/* <li> */}
+            <a href="#">
+              <Image 
+                  className={Style.socialMediaImages} 
+                  src={LogoIg} 
+                  alt="Instagram Logo" 
+                  width={24} 
+                  height={24} 
+                />
+              </a>
+            {/* </li>
+            <li> */}
+              <a href="#">
+                <Image 
+                  className={Style.socialMediaImages} 
+                  src={LogoLinkedIn} 
+                  alt="LinkedIn Logo" 
+                  width={24} 
+                  height={24} 
+                />
+              </a>
+            {/* </li> */}
+          </div>
           <div className={Style.socialColumn}>
             <div className={Style.footerTop}>
         <h2>Contact Us</h2>
@@ -43,13 +102,7 @@ const Footer: React.FC = () => {
           <button type="submit">Send</button>
         </form>
       </div>
-      <div>No te olvides de seguirnos en</div>
-            <div className={Style.socialIcons}>
-              <a href="#">Facebook</a>
-              <a href="#">Twitter</a>
-              <a href="#">Instagram</a>
-              <a href="#">LinkedIn</a>
-            </div>
+      <div>Nuestras Formas De Pago</div>
             <div>Payments</div>
             <div className={Style.paymentIcons}>
               <Image 
