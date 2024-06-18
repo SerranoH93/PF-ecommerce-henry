@@ -28,7 +28,7 @@ async function createCategories(categories) {
             }            
         });
     }
-    console.log("Categories created successfully.");
+    console.log("Las categorias se han creado exitosamente.");
 }
 
 async function createProducts(products) {
@@ -38,7 +38,7 @@ async function createProducts(products) {
         const categoryInstance = await Category.findOne({ where: { name: category } });
         console.log(categoryInstance)
         if (!categoryInstance) {
-            throw new Error(`Category ${category} not found.`);
+            throw new Error(`Caregoria ${category} no encontrada.`);
         }
 
         const productInstance = await Product.create({
@@ -52,7 +52,7 @@ async function createProducts(products) {
         });        
         await productInstance.setCategory(categoryInstance);
 
-        console.log(`Product ${name} created successfully.`);
+        console.log(`Producto ${name} creado exitosamente.`);
     }
 }
 
@@ -63,7 +63,7 @@ async function initializeDatabase() {
         const productCount = await Product.count();
 
         if (categoryCount === 0 && productCount === 0) {
-            console.log("Database is empty. Initializing data...");
+            console.log("La base de datos esta vacia. Inicializando data...");
 
             const categoriesFilePath = path.join(__dirname, '..', 'api', 'categories.json');
             const productsFilePath = path.join(__dirname, '..', 'api', 'products.json');
@@ -74,10 +74,10 @@ async function initializeDatabase() {
             await createCategories(categories);
             await createProducts(products);
         } else {
-            console.log("Database is not empty. Skipping initialization.");
+            console.log("Base de datos no esta vacia. Saltando inicialización.");
         }
     } catch (error) {
-        console.error("Error initializing database:", error);
+        console.error("Error al inicializar la base de datos:", error);
     }
 }
 

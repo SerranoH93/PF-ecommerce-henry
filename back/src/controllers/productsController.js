@@ -21,8 +21,7 @@ const getAllProducts = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
-    }
-    
+    }    
 }
 
 
