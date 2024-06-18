@@ -3,12 +3,22 @@ const uploadImage = require('../utils/cloudinaryConfiguration');
 const crypto = require('crypto');
 const newProductSchema = require('../validations/newProductSchema');
 const validateImages = require('../validations/filesValidations');
-const { Op, where } = require('sequelize');
+const { Op } = require('sequelize');
+const fs = require('fs');
+const initializeDatabase = require('../utils/initializeDatabase')
 
 const getAllProducts = async (req, res) => {
     try {
-        const productsDB = await Product.findAll({ include: Category })
-        res.status(200).json(productsDB);
+        const productsDB = await Product.findAll({ include: Category });   
+        
+        if (productsDB.length === 0) {
+            await initializeDatabase();
+            const updatedProductsDB = await Product.findAll({ include: Category });
+            return res.status(200).json(updatedProductsDB);         
+        }    
+        
+        return res.status(200).json(productsDB);
+
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
