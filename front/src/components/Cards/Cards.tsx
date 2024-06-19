@@ -15,25 +15,36 @@ const Cards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    // Aquí deberíamos reemplazar la URL por la de tu API real
-    fetch('http://localhost:3002/products/')
-      .then(response => response.json())
-      .then(data => {
+useEffect(() => {
+  fetch('http://localhost:3002/products/')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (Array.isArray(data)) {
         setProducts(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-        setLoading(false);
-      });      
-  }, []);
+      } else {
+        console.error('Expected array but received:', data);
+      }
+      setLoading(false);
+    })
+    .catch(error => {
+      console.error('Error fetching products:', error);
+      setLoading(false);
+    });      
+}, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+if (loading) {
+  return <p>Loading...</p>;
+}
 
-  console.log(products, 'Productos')
+if (!Array.isArray(products)) {
+  return <p>Error: Unexpected data format</p>;
+}
+console.log(products, 'Productos');
 
   return (
     <div className={Style.cardContainer}>
