@@ -1,7 +1,7 @@
 const {Product, Category} = require('../db')
 const {Op, where} = require('sequelize')
 
-const getAllCategorys =  async (req, res) => {
+const getAllCategories =  async (req, res) => {
     try {
         const categoriesDB = await Category.findAll({ include: Product})
         res.status(200).json(categoriesDB)
@@ -23,6 +23,6 @@ const getCatogoryByName = async (req, res) => {
 }
 
 module.exports = {
-    getAllCategorys,
+    getAllCategories,
     getCatogoryByName
 }
