@@ -10,7 +10,7 @@ const getAllCategories =  async (req, res) => {
     }
 }
 
-const getCatogoryByName = async (req, res) => {
+const getCategoryByName = async (req, res) => {
     const {name} = req.query
     try {
         const categorie =  await Category.findAll({
@@ -24,5 +24,5 @@ const getCatogoryByName = async (req, res) => {
 
 module.exports = {
     getAllCategories,
-    getCatogoryByName
+    getCategoryByName
 }
