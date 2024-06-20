@@ -2,10 +2,11 @@
 
 export default function SearchBar() {
     return (
-        
-
-        <button>
-            buscar
-        </button>
+        <div>
+            <input type="text" />
+            <button>
+                buscar
+            </button>
+        </div>
     )
 }

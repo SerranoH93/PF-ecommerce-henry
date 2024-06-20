@@ -1,46 +1,53 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('product', {
+    sequelize.define('user', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        name: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        description: {
+        role: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        price: {
-            type: DataTypes.FLOAT,
+        created_at: {
+            type: DataTypes.DATE,
             allowNull: false
         },
-        gender: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        stock: {
-            type: DataTypes.INTEGER,
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        auth_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        address: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        phone: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         active: {
             type: DataTypes.BOOLEAN,
-            defaultValue: true            
-        },
-        size: {
-            type: DataTypes.INTEGER,//  DataTypes.JSON,
-            allowNull: true,
-            // defaultValue: {}            
-        },
-        images: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
-        }
-    }, {         
+        },
+
+    }, {
         paranoid: true
     });
 };
+
+
+
