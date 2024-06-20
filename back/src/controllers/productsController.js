@@ -12,13 +12,11 @@ const getAllProducts = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
-    
 }
-
 
 const postNewProduct = async (req, res) => {
     try {
-        
+
         //* Se realizan validaciones del formulario
         let validationsCheck = await newProductSchema.safeParseAsync(req.body);
         // console.log(validationsCheck, 'validaciones')
@@ -87,17 +85,32 @@ const deleteProduct = async (req, res) => {
             }});
             res.status(200).json({ message: 'Producto eliminado exitosamente' });
         }    
-
-        
-
-        
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
+    }
+}
+
+
+const editProduct = async (req, res) => {
+    try {
+        res.status(200).json({message: 'products/edit funciona'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+}
+
+const activeUnactiveProduct = async (req, res) => {
+    try {
+        res.status(200).json({message: 'products/activeUnactive funciona'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
 }
 
 module.exports = {
         getAllProducts,
         postNewProduct,
-        deleteProduct
+        deleteProduct,
+        editProduct,
+        activeUnactiveProduct
     };
