@@ -1,7 +1,10 @@
+"Use client"
+
 import React from 'react';
+import Image from 'next/image';
 import styles from './Card.module.css'
 import ButtonCart from '@/components/ButtonCart/ButtonCart'
-
+import estrellitas from '@/assets/estrellita.png'
  interface ProductCard {
   id: number;
   name: string;
@@ -19,9 +22,17 @@ import ButtonCart from '@/components/ButtonCart/ButtonCart'
         <div className={styles.title}>
           <h2 className={styles.productName}>{name}TERRIBLE AUTITO</h2>
         </div>
+        <div className={styles.punctuation}>
+          <Image src={estrellitas} alt='punctuation' className={styles.estrellita}/>
+          <Image src={estrellitas} alt='punctuation' className={styles.estrellita}/>
+          <Image src={estrellitas} alt='punctuation' className={styles.estrellita}/>
+          <Image src={estrellitas} alt='punctuation' className={styles.estrellita}/>
+          <p> 4/5</p>
+        </div>
         <div className={styles.action}>
           <div className={styles.price}>
-            <span>{price}$200</span>
+            <span>${price}</span> 
+            
           </div>
           <ButtonCart/>
         </div>
