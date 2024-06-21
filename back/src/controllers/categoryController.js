@@ -8,6 +8,7 @@ const getCategories = async (req, res) => {
     if (name) {
       const category = await Category.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
+        include: Product,
       });
       res.status(200).json(category);
     } else {
@@ -34,5 +35,5 @@ const getCategoryByName = async (req, res) => {
 }
 */
 module.exports = {
-    getCategories
+  getCategories,
 };
