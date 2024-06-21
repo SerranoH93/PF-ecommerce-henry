@@ -1,6 +1,7 @@
 import Link from "next/link"
 import SearchBar from '@/components/SearchBar'
 
+
 export default function navBar() {
     return (
         <nav className="">
@@ -13,7 +14,7 @@ export default function navBar() {
 
                 <ul className="flex gap-5">
                     <li>
-                        <Link href='/crear'>
+                        <Link href='/product'>
                             Crear
                         </Link>
                     </li>
