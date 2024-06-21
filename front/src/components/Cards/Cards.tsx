@@ -15,7 +15,7 @@ const Cards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage: number = 18;
+  const itemsPerPage: number = 15;
 
   useEffect(() => {
     let isMounted = true;
