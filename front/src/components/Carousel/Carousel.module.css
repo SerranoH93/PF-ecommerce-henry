@@ -4,6 +4,7 @@
     margin: auto;
     background-color: var(--color1);
     min-height: 35vw;
+    height: 5rem;
   }
   
   .dotContainer {
@@ -50,7 +51,7 @@
     max-height: 35vw;
   
     object-fit: cover;
-    /* object-position: 0px -220px; */
+    /*object-position: 0px -100px; */
     display: block;
     margin: auto;
   }

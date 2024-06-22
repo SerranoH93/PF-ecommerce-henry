@@ -18,7 +18,7 @@ export default function NavBar() {
 
                 <ul className="flex gap-5 " >
                     <li>
-                        <Link href='/crear' className="text-white">
+                        <Link href='/product' className="text-white">
                             Crear
                         </Link>
                     </li>

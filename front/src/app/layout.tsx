@@ -7,6 +7,7 @@ import "./globals.css";
 import Cards from '@/components/Cards/Cards'
 import Footer from "@/components/Footer/Footer";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NavBar />
         {children}
+        
        <Footer/>
         </body>
     </html>

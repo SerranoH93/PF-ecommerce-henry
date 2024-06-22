@@ -8,8 +8,8 @@ import style from '../Carousel/Carousel.module.css'
 export default function Carousel() {
 
   const images = [
-    "https://i.ibb.co/LZzKHF2/porsche-zoom2-1.jpg",
-    "https://i.ibb.co/HVf1n1K/pexels-hyundai-motor-group-11158760-2-1-1.jpg",
+    "https://i.pinimg.com/564x/e4/fd/ff/e4fdffa14b80d38a2de883c093d5c6c8.jpg",
+    "https://images.pexels.com/photos/5625040/pexels-photo-5625040.jpeg",
     "https://i.ibb.co/85jswKW/pexels-sourav-mishra-2710043-2.jpg",
     "https://i.ibb.co/cvdLnCv/pexels-brett-sayles-1592261-2-1.jpg",
   ]
