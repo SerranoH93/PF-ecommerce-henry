@@ -9,6 +9,10 @@ interface Product {
   name: string;
   price: number;
   images: string[];
+  description: string;
+  gender: string;
+  size: number;
+  stock: number;
 }
 
 const Cards: React.FC = () => {
@@ -19,24 +23,25 @@ const Cards: React.FC = () => {
 
   useEffect(() => {
     let isMounted = true;
+
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:3002/products/');
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('La respuesta de la red no fue satisfactoria');
         }
         const data = await response.json();
         if (isMounted) {
           if (Array.isArray(data)) {
             setProducts(data);
           } else {
-            console.error('Expected array but received:', data);
+            console.error('Se esperaba un array pero se recibió:', data);
           }
           setLoading(false);
         }
       } catch (error) {
         if (isMounted) {
-          console.error('Error fetching products:', error);
+          console.error('Error al obtener los productos:', error);
           setLoading(false);
         }
       }
@@ -50,11 +55,11 @@ const Cards: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Cargando...</p>;
   }
 
   if (!Array.isArray(products)) {
-    return <p>Error: Unexpected data format</p>;
+    return <p>Error: Formato de datos inesperado</p>;
   }
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -75,7 +80,11 @@ const Cards: React.FC = () => {
             id={product.id}
             name={product.name}
             price={product.price}
-            imageUrl={product.images[0]}
+            image={product.images[0]}
+            description={product.description}
+            gender={product.gender}
+            size={product.size}
+            stock={product.stock}
           />
         ))}
       </div>
