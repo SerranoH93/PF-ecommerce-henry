@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
 const ProductSchema = z.object({
-    images: z.instanceof(FileList),
+    images: z
+    .any()
+    .refine((files) => files instanceof FileList && files.length > 0, {
+        message: "Debe seleccionar al menos una imagen",
+    }),
     name: z
         .string({
             required_error: "El Nombre es obligatorio",
