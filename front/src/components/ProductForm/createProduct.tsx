@@ -23,13 +23,14 @@ const CreateProduct: React.FC = () => {
   });
 
   const onSubmit = async (data: ProductFormInputs) => {
+    console.log('onSubmit', data)
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description);
     formData.append('price' , data.price.toString());
     formData.append('gender', data.gender);
     formData.append('stock', data.stock.toString());
-    formData.append('active', data.active.toString());
+    formData.append('active', data.active?.toString() ?? false);
     formData.append('size', data.size.toString());
 
     if (data.images && data.images.length > 0) {
@@ -55,6 +56,7 @@ const CreateProduct: React.FC = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -68,6 +70,7 @@ const CreateProduct: React.FC = () => {
 
   return (
     <div className='flex justify-center flex-col items-center w-full'>
+      {/* <p>{JSON.stringify(errors)}</p>  */}
       <h1 className='text-5xl text-center my-10 font-black'>Create New Product</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div >

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const ProductSchema = z.object({
+    images: z.instanceof(FileList),
     name: z
         .string({
             required_error: "El Nombre es obligatorio",
@@ -39,7 +40,7 @@ const ProductSchema = z.object({
         .number({
             required_error: 'El stock es obligatorio'
         }),
-    active: z.boolean().or(z.string().transform(s => s === 'true')),
+  //   active: z.boolean().or(z.string().transform(s => s === 'true')),
     size: z.number({
         required_error: 'La talla es obligatoria'
     })
