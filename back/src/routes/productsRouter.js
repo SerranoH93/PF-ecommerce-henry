@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { getAllProducts, postNewProduct, deleteProduct, editProduct, activeUnactiveProduct} = require('../controllers/productsController');
+const { getAllProducts, postNewProduct, deleteProduct, editProduct, activeUnactiveProduct, getProductById } = require('../controllers/productsController');
 const upload = require('../utils/multerConfiguration');
 
 
 const productsRoute = Router();
-
+productsRoute.get('/:id', getProductById)
 productsRoute.get('/', getAllProducts);
 productsRoute.post('/create', upload, postNewProduct); //*Añadir producto nuevo
 productsRoute.delete('/delete/:id', deleteProduct); //*Borrar producto
