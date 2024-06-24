@@ -7,47 +7,29 @@ module.exports = (sequelize) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true,
+            },
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        auth_type: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        active: {
+        email_verified: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            defaultValue: false,
         },
-
+        name: {
+            type: DataTypes.STRING,
+        },
+        nickname: {
+            type: DataTypes.STRING,
+        },
+        picture: {
+            type: DataTypes.STRING,
+        }
     }, {
-        paranoid: true
+        paranoid: true,
+        timestamps: true
     });
 };
-
-
-

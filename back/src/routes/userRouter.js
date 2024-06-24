@@ -3,7 +3,7 @@ const { registerUser, loginUser, editUser } = require('../controllers/userContro
 
 const userRouter = Router();
 
-userRouter.get('/register', registerUser);
+userRouter.post('/register', registerUser);
 userRouter.get('/login', loginUser);
 userRouter.put('/edit', editUser);
 
