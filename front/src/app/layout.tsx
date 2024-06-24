@@ -1,10 +1,9 @@
 "use client"
 
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import NavBar from '@/components/NavBar'
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Cards from '@/components/Cards/Cards'
 import Footer from "@/components/Footer/Footer";
 
 

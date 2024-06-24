@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Carousel from '@/components/Carousel/Carousel'
 import Cards from "@/components/Cards/Cards";
 

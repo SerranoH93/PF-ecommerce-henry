@@ -5,7 +5,7 @@ import Card from '@/components/Card/Card';
 import Style from "./Cards.module.css";
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   images: string[];

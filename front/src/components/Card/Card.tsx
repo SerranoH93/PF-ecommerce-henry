@@ -8,7 +8,7 @@ import ButtonCart from '@/components/ButtonCart/ButtonCart';
 import estrellitas from '@/assets/estrellita.png';
 
 interface ProductCard {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -38,7 +38,7 @@ const Card: React.FC<ProductCard> = ({ id, name, price, image }) => {
         <div className={styles.price}>
           <span>${price}</span>
         </div>
-        <Link href={`/products/${id}`} passHref>
+        <Link href={`/productDetail/${id}`} passHref>
           <ButtonCart />
         </Link>
       </div>
