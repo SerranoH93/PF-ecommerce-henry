@@ -23,7 +23,7 @@ export default function NavBar() {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/login' className="text-white">
+                        <Link href='/api/auth/login' className="text-white">
                             Login
                         </Link>
                     </li>
