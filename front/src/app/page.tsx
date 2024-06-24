@@ -12,10 +12,12 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Landing</h1>
+      
     
       <Carousel />
-
+      <div>
+      <h1 className="flex justify-center p-5 text-lg font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
+      </div>
       <Cards/>
     </div>
   );
