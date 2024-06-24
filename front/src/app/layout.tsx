@@ -30,6 +30,7 @@ export default function RootLayout({
         <Footer/>
         </body>
       </UserProvider>
+      </UserProvider>
     </html>
   );
 }
