@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import styles from './ProductDetail.module.css';
 
 interface Product {
@@ -19,9 +18,8 @@ interface Product {
 const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
- const router = useRouter();
-  const { id } = router.query;
+  const [error, setError] = useState<string | null>(null);  
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {
@@ -44,9 +42,6 @@ const ProductDetail: React.FC = () => {
     }
   }, [id]);
 
-  console.log('Product:', product);
-  console.log('Loading:', loading);
-
   if (loading) {
     return <p>Cargando...</p>;
   }
@@ -61,15 +56,18 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className={styles.productDetail}>
-      <h1>Detalle del Producto</h1>
-      <Image src={product.images[0]} alt={product.name} width={500} height={500} />
-      <p>ID: {product.id}</p>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
-      <p>Precio: ${product.price}</p>
-      <p>Tamaño: {product.size}</p>
-      <p>Género: {product.gender}</p>
-      <p>Stock: {product.stock}</p>
+      <div className={styles.productImage}>
+        <Image src={product.images[0]} alt={product.name} width={300} height={300} />
+      </div>
+      <div className={styles.productInfo}>
+        <h1>Detalle del Producto</h1>
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
+        <p>Precio: ${product.price}</p>
+        <p>Talle: {product.size}</p>
+        <p>Género: {product.gender}</p>
+        <p>Stock: {product.stock}</p>
+      </div>
     </div>
   );
 };
