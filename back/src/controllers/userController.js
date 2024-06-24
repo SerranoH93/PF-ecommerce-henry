@@ -13,14 +13,9 @@ const registerUser = async (req, res) => {
 
         let existingUser = await User.findOne({ where: { email } });
 
-        if (existingUser.email_verified == false && email_verified == true){
-            existingUser = await existingUser.update({
-                email_verified: true
-            })
-        }
-
         if (existingUser) {
             return res.status(200).send("Existing User");
+            
         } else {
             const newUser = await User.create({
                 email, 
