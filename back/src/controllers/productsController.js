@@ -24,6 +24,22 @@ const getAllProducts = async (req, res) => {
     }    
 }
 
+const getProductById = async(req, res) => {
+    const productId = req.params.id;
+
+    try {
+        const product = await Product.findByPk(productId, { include: Category });
+
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        res.status(200).json(product);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+};
+
 const postNewProduct = async (req, res) => {
     try {
 
@@ -133,6 +149,7 @@ const activeUnactiveProduct = async (req, res) => {
 
 module.exports = {
         getAllProducts,
+        getProductById,
         postNewProduct,
         deleteProduct,
         editProduct,
