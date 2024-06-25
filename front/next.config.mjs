@@ -1,17 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+        dangerouslyAllowSVG: true,
         remotePatterns: [
-          {
-            protocol: 'https',
-            hostname: '**',  // Permitir cualquier host
-          },
-          {
-            protocol: 'http',
-            hostname: '**',  // Permitir cualquier host
-          },
+            {
+                protocol: "https",
+                hostname: "res.cloudinary.com",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "s.gravatar.com",
+                port: "",
+                pathname: "/**"
+            }
         ],
-      },
+    }
 };
 
 export default nextConfig;
