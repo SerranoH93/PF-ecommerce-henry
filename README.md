@@ -7,6 +7,8 @@
 <p align="justify"> Moda Urbana es una aplicación de comercio electrónico diseñada para ofrecer una experiencia de compra en línea fluida y atractiva. Esta aplicación permite a los usuarios explorar una amplia variedad de productos de moda, buscar artículos específicos, y realizar compras de manera segura y conveniente.<br>
 
 ## 🚀 Nuestro equipo
+<div style="text-align: center;">
+
 | Nombre | Rol | Redes Sociales |
 | ------ | --- | --------------- |
 | Ricardo Nery Dosko | Dev Frontend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ricardo-dosko/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RicardoDosko) |
@@ -15,6 +17,8 @@
 | Facundo Sura | Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/facundo-martin-emiliano-s-974b74253/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Facundo-Sura) |
 |David Palomino| Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/david-palomino-256013295/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DavidPalomino) |
 | Alejandro Serrano Herrera | Dev Backend | [![LinkedIn](https://img.shields.io/badge/linkedin%20-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/serranoh93/) [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SerranoH93) |
+
+</div>
 
 
 ## 🚀 Tecnologías Utilizadas
