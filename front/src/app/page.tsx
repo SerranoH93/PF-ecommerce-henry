@@ -11,8 +11,6 @@ export default async function Home() {
 
   return (
     <div>
-      
-    
       <Carousel />
       <div>
       <h1 className="flex justify-center p-5 text-lg font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
