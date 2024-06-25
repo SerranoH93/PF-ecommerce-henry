@@ -3,7 +3,7 @@ const uploadImage = require('../utils/cloudinaryConfiguration');
 const crypto = require('crypto');
 const newProductSchema = require('../validations/newProductSchema');
 const validateImages = require('../validations/filesValidations');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const fs = require('fs');
 const initializeDatabase = require('../utils/initializeDatabase')
 
@@ -59,7 +59,20 @@ const postNewProduct = async (req, res) => {
             const result = await uploadImage('product', uniqueField, fileBuffer, i);
             imagesUrl.push(result.secure_url);
         }
-        //console.log(imagesUrl, 'images')
+        //console.log(imagesUrl, 'images');
+
+        const categoryToLowerCase = req.body.category.toLowerCase()
+        // console.log(categoryToLowerCase)
+        const category = await Category.findOne({
+            where: {
+                name: categoryToLowerCase
+            }
+        })
+        console.log(category, "Categoría encontrada");
+
+        if(!category) {
+            return res.status(400).json({message: 'La categoría no existe'})
+        }
 
         const newProduct = await Product.create({
             id: req.body.id,
@@ -70,11 +83,12 @@ const postNewProduct = async (req, res) => {
             stock: req.body.stock,
             active: req.body.active,
             size: req.body.size,
-            images: imagesUrl
+            images: imagesUrl,
+            category_id: category.id
         })    
         
         // console.log(newProduct);
-        res.status(200).json('Se creo nuevo producto'); 
+        res.status(200).json({message: 'Se creo nuevo producto'}); 
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }     

@@ -42,7 +42,10 @@ const newProductSchema = z.object({
     active: z.boolean().or(z.string().transform(s => s === 'true')), //! Revisar validación cuando se implemente con el back
     size: z.coerce.number({
             requiredError: 'Talla obligatorio'
-        })
+        }),
+    category: z.string({
+        required_error: 'La categoería es obligatoria'
+    })
 })
 
 module.exports = newProductSchema;
