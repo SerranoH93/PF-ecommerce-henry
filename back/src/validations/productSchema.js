@@ -1,9 +1,9 @@
 const { z } = require('zod');
 
-const newProductSchema = z.object({
+const productSchema = z.object({
     name: z
         .string({
-            required_error: "El Nombr es obligatorio",
+            required_error: "El Nombre es obligatorio",
         })
         .min(3, {
             message: 'El nombre debe contener al menos 3 caracteres'
@@ -48,4 +48,4 @@ const newProductSchema = z.object({
     })
 })
 
-module.exports = newProductSchema;
+module.exports = productSchema;

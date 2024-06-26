@@ -1,7 +1,7 @@
 const { Product, Category } = require('../db');
 const uploadImage = require('../utils/cloudinaryConfiguration');
 const crypto = require('crypto');
-const newProductSchema = require('../validations/newProductSchema');
+const productSchema = require('../validations/productSchema');
 const validateImages = require('../validations/filesValidations');
 const { Op, where } = require('sequelize');
 const fs = require('fs');
@@ -45,7 +45,7 @@ const postNewProduct = async (req, res) => {
     try {
 
         //* Se realizan validaciones del formulario
-        let validationsCheck = await newProductSchema.safeParseAsync(req.body);
+        let validationsCheck = await productSchema.safeParseAsync(req.body);
         // console.log(validationsCheck, 'validaciones')
 
         if(validationsCheck.success === false) {
@@ -107,7 +107,7 @@ const postNewProduct = async (req, res) => {
         // console.log(newProduct);
         res.status(200).json({message: 'Se creo nuevo producto'}); 
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ message: 'Error al crear el producto', error: error.message });
     }     
 }
 
