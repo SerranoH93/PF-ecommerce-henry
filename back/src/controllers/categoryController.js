@@ -7,11 +7,25 @@ const getAllCategories = async (req, res) => {
         const categoriesDB = await Category.findAll({ Category });
         res.status(200).json(categoriesDB);
     } catch (error) {
-        res.status(400).json({
-            error: error.message,
-        });
+        res.status(500).json({ message: 'Error de la base de datos', error: error.message });
     }
 };
+
+const getCategoryById = async (req, res) => {
+    const categoryId = req.params.id;
+
+    try {
+        const category = await Category.findByPk(categoryId);
+        
+        if(!category) {
+            return res.status(404).json({ message: 'Categoría no encontrada'});
+        }
+
+        res.status(200).json(category);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+}
 
 const newCategory = async (req, res) => {
     try {
@@ -28,7 +42,7 @@ const newCategory = async (req, res) => {
                 name: categoryToLowerCase
             }
         });
-        console.log(category, "Categoría encontrada");
+        // console.log(category, "Categoría encontrada");
 
         if(category) {
             return res.status(400).json({message: 'La categoría ya existe'})
@@ -42,11 +56,12 @@ const newCategory = async (req, res) => {
         res.status(200).json({message: 'Se creo nueva categoría'});
 
     } catch (error) {
-        res.status(500).json({ message: 'Error al crear la categoria', error: error.message })
-
+        res.status(500).json({ message: 'Error al crear la categoria', error: error.message });
     }
-}
+};
+
 module.exports = {
     getAllCategories,
+    getCategoryById,
     newCategory
 };
