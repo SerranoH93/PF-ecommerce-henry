@@ -1,5 +1,12 @@
 const { Router } = require('express');
-const { getAllProducts, getProductById, postNewProduct, deleteProduct, editProduct, activeUnactiveProduct} = require('../controllers/productsController');
+const { 
+    getAllProducts, 
+    getProductById, 
+    postNewProduct, 
+    deleteProduct, 
+    editProduct, 
+    activeUnactiveProduct
+} = require('../controllers/productsController');
 const upload = require('../utils/multerConfiguration');
 
 

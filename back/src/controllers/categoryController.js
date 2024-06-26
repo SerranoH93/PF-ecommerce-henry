@@ -27,7 +27,7 @@ const getCategoryById = async (req, res) => {
     }
 };
 
-const newCategory = async (req, res) => {
+const postNewCategory = async (req, res) => {
     try {
         // console.log(req.body)
         let validationsCheck = await categoriesSchema.safeParseAsync(req.body);
@@ -60,6 +60,36 @@ const newCategory = async (req, res) => {
     }
 };
 
+const editCategory = async (req, res) => {
+    try {
+        let validationsCheck = await categoriesSchema.safeParseAsync(req.body);
+
+        if (validationsCheck.success === false) {
+            return res.status(400).json(validationsCheck.error.issues[0])
+        }
+
+        const category = await Category.findByPk(req.params.id);
+
+        if (!category) {
+            return res.status(404).json({ message: 'Categoría no encontrada' });
+        }
+
+        const editedCaregory = await Category.update({
+            name: req.body.name.toLowerCase(),
+            description: req.body.description
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        });
+
+        res.status(200).json({message: 'Categoría editada correctamente'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error al editar la categoría', error: error.message });
+    }
+}
+
 const deleteCategory = async (req, res) => {
     const categoryId = req.params.id;
 
@@ -84,6 +114,7 @@ const deleteCategory = async (req, res) => {
 module.exports = {
     getAllCategories,
     getCategoryById,
-    newCategory,
-    deleteCategory
+    postNewCategory,
+    deleteCategory,
+    editCategory
 };

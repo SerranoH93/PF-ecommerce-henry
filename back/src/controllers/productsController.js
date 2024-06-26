@@ -113,7 +113,7 @@ const postNewProduct = async (req, res) => {
 
 const editProduct = async (req, res) => {
     try {     
-        let validationsCheck = await newProductSchema.safeParseAsync(req.body);
+        let validationsCheck = await productSchema.safeParseAsync(req.body);
         
         if(validationsCheck.success === false) {
             return res.status(400).json(validationsCheck.error.issues[0]);
