@@ -23,7 +23,7 @@ const getAllProducts = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }    
-}
+};
 
 const getProductById = async(req, res) => {
     const productId = req.params.id;
@@ -109,7 +109,7 @@ const postNewProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error al crear el producto', error: error.message });
     }     
-}
+};
 
 const editProduct = async (req, res) => {
     try {     
@@ -191,15 +191,17 @@ const deleteProduct = async (req, res) => {
         if (!product) {
             return res.status(404).json({ message: 'Producto no encontrado' });
         } else {
-            await Product.destroy({where: {
-                id: product.id
-            }});
+            await Product.destroy({
+                where: {
+                    id: product.id
+                }
+            });
             res.status(200).json({ message: 'Producto eliminado exitosamente' });
         }    
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
     }
-}
+};
 
 const activeUnactiveProduct = async (req, res) => {
     try {
@@ -207,7 +209,7 @@ const activeUnactiveProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
-}
+};
 
 module.exports = {
         getAllProducts,
