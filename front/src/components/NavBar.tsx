@@ -13,23 +13,23 @@ interface filter {
 export default function NavBar() {
   const [filters, setfilters] = useState<filter[]>([]);
 
-  useEffect(() => {
-    const fetchfilters = async () => {
-      try {
-        const response = await fetch('/api/filters'); // URL correcta para la API
-        if (response.ok) {
-          const data = await response.json();
-          setfilters(data);
-        } else {
-          console.error('Error al obtener filters:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error de red:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchfilters = async () => {
+  //     try {
+  //       const response = await fetch('/api/filters'); // URL correcta para la API
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setfilters(data);
+  //       } else {
+  //         console.error('Error al obtener filters:', response.statusText);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error de red:', error);
+  //     }
+  //   };
 
-    fetchfilters();
-  }, []);
+  //   fetchfilters();
+  // }, []);
 
   return (
     <nav className="">

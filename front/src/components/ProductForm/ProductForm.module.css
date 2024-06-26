@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: 10px;
+}
+
+.label input,
+.label select {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #4e0101;
+    border-radius: 4px;
+}
+
+.submitButton {
+    background-color: #4CAF50;
+    color: rgb(147, 14, 14);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submitButton:hover {
+    background-color: #45a049;
+}
