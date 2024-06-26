@@ -7,9 +7,10 @@ const productsRoute = Router();
 
 productsRoute.get('/', getAllProducts);
 productsRoute.get('/:id', getProductById);
-productsRoute.post('/create', upload, postNewProduct); //*Añadir producto nuevo
-productsRoute.delete('/delete/:id', deleteProduct); //*Borrar producto
-productsRoute.put('/editProduct', editProduct)
-productsRoute.put('/productStatus', activeUnactiveProduct)
+
+productsRoute.post('/create', upload, postNewProduct); //*Añadir producto nuevo (Se cambiará a la ruta admin)
+productsRoute.delete('/delete/:id', deleteProduct); //*Borrar producto (Se cambiará a la ruta admin)
+productsRoute.put('/edit/:id', upload, editProduct)  //* Editar producto (Se cambiará a la ruta admin)
+productsRoute.put('/productStatus', activeUnactiveProduct) //* Cambiar estatus (Se cambiará a la ruta admin) REVISAR SI ES NECESARIO
 
 module.exports = productsRoute;

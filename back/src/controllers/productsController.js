@@ -5,7 +5,8 @@ const newProductSchema = require('../validations/newProductSchema');
 const validateImages = require('../validations/filesValidations');
 const { Op, where } = require('sequelize');
 const fs = require('fs');
-const initializeDatabase = require('../utils/initializeDatabase')
+const initializeDatabase = require('../utils/initializeDatabase');
+
 
 const getAllProducts = async (req, res) => {
     try {
@@ -83,7 +84,7 @@ const postNewProduct = async (req, res) => {
             where: {
                 name: categoryToLowerCase
             }
-        })
+        });
         console.log(category, "Categoría encontrada");
 
         if(!category) {
@@ -110,6 +111,76 @@ const postNewProduct = async (req, res) => {
     }     
 }
 
+const editProduct = async (req, res) => {
+    try {     
+        let validationsCheck = await newProductSchema.safeParseAsync(req.body);
+        
+        if(validationsCheck.success === false) {
+            return res.status(400).json(validationsCheck.error.issues[0]);
+        }
+
+        const product = await Product.findByPk(req.params.id);
+        
+        if(!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        const validationResult = validateImages(req.files);
+        
+        if(!validationResult.valid) {
+            return res.status(400).json({
+                message: 'Uno o más archivos no son válidos',
+                errors: validationResult.errors
+            })
+        }
+
+        const files = req.files;
+        const uniqueField = product.id;
+        const imagesUrl = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const fileBuffer = files[i].buffer;
+            const result = await uploadImage('product', uniqueField, fileBuffer, i);
+            imagesUrl.push(result.secure_url);
+        }
+
+
+        const categoryToLowerCase = req.body.category.toLowerCase()
+        // console.log(categoryToLowerCase)
+        const category = await Category.findOne({
+            where: {
+                name: categoryToLowerCase
+            }
+        });
+        // console.log(category, "Categoría encontrada");
+
+        if(!category) {
+            return res.status(400).json({message: 'La categoría no existe'})
+        }
+
+        const editedPrduct = await Product.update({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            gender: req.body.gender,
+            stock: req.body.stock,
+            active: req.body.active,
+            size: req.body.size,
+            images: imagesUrl,
+            category_id: category.id
+        },
+        {
+            where: { 
+                id: req.params.id 
+            }
+        });
+
+        res.status(200).json({message: 'Producto editado correctamente'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error al editar el producto', error: error.message });
+    }
+}
+
 const deleteProduct = async (req, res) => {
     const productId = req.params.id;
 
@@ -127,15 +198,6 @@ const deleteProduct = async (req, res) => {
         }    
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
-    }
-}
-
-
-const editProduct = async (req, res) => {
-    try {
-        res.status(200).json({message: 'products/edit funciona'});
-    } catch (error) {
-        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
 }
 
