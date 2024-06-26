@@ -68,14 +68,14 @@ const postNewProduct = async(req, res) => {
         const uniqueField = req.body.id;
         const imagesUrl = [];
 
-        console.log(files, 'imagenes')
+        //console.log(files, 'imagenes')
 
         for (let i = 0; i < files.length; i++) {
             const fileBuffer = files[i].buffer;
             const result = await uploadImage('product', uniqueField, fileBuffer, i);
             imagesUrl.push(result.secure_url);
         }
-        console.log(imagesUrl, 'images')
+        //console.log(imagesUrl, 'images')
 
         const newProduct = await Product.create({
             id: req.body.id,
@@ -101,7 +101,7 @@ const deleteProduct = async(req, res) => {
 
     try {
         const product = await Product.findByPk(productId);
-        console.log(product)
+        //console.log(product)
 
         if (!product) {
             return res.status(404).json({ message: 'Producto no encontrado' });
