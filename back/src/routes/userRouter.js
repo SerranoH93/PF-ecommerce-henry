@@ -4,7 +4,6 @@ const { registerUser, loginUser, editUser } = require('../controllers/userContro
 const userRouter = Router();
 
 userRouter.post('/register', registerUser);
-
 userRouter.put('/edit', editUser);
 
 module.exports = userRouter;

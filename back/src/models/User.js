@@ -22,9 +22,6 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
         },
-        nickname: {
-            type: DataTypes.STRING,
-        },
         picture: {
             type: DataTypes.STRING,
         }

@@ -28,10 +28,17 @@ const registerUser = async (req, res) => {
         }
 
     } catch (error) {
-        console.error('Error in registerUser:', error);
         res.status(500).json({ message: 'Database error', error: error.message });
     }
 };
+
+const getUser = async(req,res) =>{
+    try {
+        res.status(200).json({message: 'user/get'});
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+}
 
 const editUser = async (req, res) => {
     try {
