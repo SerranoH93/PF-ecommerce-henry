@@ -1,0 +1,29 @@
+.sider {
+    width: 200px;
+    height: 100vh;
+    background-color: #001529;
+    color: #fff;
+}
+
+.sider .logo {
+    height: 32px;
+    margin: 16px;
+    background-color: #1890ff;
+}
+
+.sider .menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sider .menu li {
+    padding: 16px;
+}
+
+.sider .menu li a {
+    color: #fff;
+}
+
+.sider .menu li.active {
+    background-color: #1890ff;
+}
