@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Cards from '@/components/Cards/Cards';
 import Filters from '@/components/Filters/Filtes';
 import useFetchProducts from '@/Hooks/useFetchProducts';
+import Carousel from './Carousel/Carousel';
 
 interface Product {
     id: number;
@@ -49,6 +50,7 @@ const HomeClient: React.FC<HomeClientProps> = ({ user, initialProducts }) => {
 
     return (
         <div>
+            <Carousel/>
             <Filters
                 nameFilter={nameFilter}
                 setNameFilter={setNameFilter}
