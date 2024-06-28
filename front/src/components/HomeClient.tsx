@@ -57,8 +57,9 @@ const HomeClient: React.FC<HomeClientProps> = ({ user, initialProducts }) => {
                 genderFilter={genderFilter}
                 setGenderFilter={setGenderFilter}
                 onSearch={handleSearch}
+                onClick={handleReset}
             />
-            <button onClick={handleReset}>Reiniciar filtros</button>
+            
             <h1 className="flex justify-center p-5 text-lg font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
             <Cards products={products} />
         </div>

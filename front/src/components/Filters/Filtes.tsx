@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from './Filters.module.css'
 
 interface FiltersProps {
@@ -11,10 +11,40 @@ interface FiltersProps {
     genderFilter: string;
     setGenderFilter: (value: string) => void;
     onSearch: () => void;
+    onClick: () => void;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
 
-const Filters: React.FC<FiltersProps>  = ({ nameFilter, setNameFilter, categoryFilter, setCategoryFilter, genderFilter, setGenderFilter, onSearch }) => {
+const Filters: React.FC<FiltersProps>  = ({ 
+    nameFilter, 
+    setNameFilter, 
+    categoryFilter, 
+    setCategoryFilter, 
+    genderFilter, 
+    setGenderFilter, 
+    onSearch, 
+    onClick 
+}) => {
+
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:3002/categories/');
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
+
     return (
         <div>
             <label htmlFor="">Buscar: </label>
@@ -33,12 +63,11 @@ const Filters: React.FC<FiltersProps>  = ({ nameFilter, setNameFilter, categoryF
                 className='text-black'
             >
                 <option className='text-black' value="">Seleccionar categoría</option>
-                <option className='text-black' value="1">Pantalones</option>
-                <option className='text-black' value="2">Rameras</option>
-                <option className='text-black' value="3">Chaquetas</option>
-                <option className='text-black' value="4">Buzos</option>
-                <option className='text-black' value="5">Faldas</option>
-                <option className='text-black' value="6">Camisas</option>
+                {categories.map((category) => (
+                    <option key={category.id} className='text-black' value={category.id}>
+                        {category.name}
+                    </option>
+                ))}
             </select>
 
             <label htmlFor="">Filtro por género: </label>
@@ -53,6 +82,7 @@ const Filters: React.FC<FiltersProps>  = ({ nameFilter, setNameFilter, categoryF
             </select>
 
             <button onClick={onSearch}>Buscar</button>
+            <button onClick={onClick}>Reiniciar filtros</button>
         </div>
     )
 }
