@@ -5,26 +5,20 @@ const getFilter = async (req, res) => {
   const { name, gender, category } = req.query;
 
   try {
+    const where = {};
+
     if (name) {
-      const productName = await Product.findAll({
-        where: { name: { [Op.iLike]: `%${name}%` } },
-      });
-      res.status(200).json(productName);
-    } else if (gender) {
-      const productGen = await Product.findAll({
-        where: { gender: { [Op.iLike]: `%${gender}%` } },
-      });
-      res.status(200).json(productGen);
-    } else if (category) {
-      const productCat = await Category.findAll({
-        where: { name: { [Op.iLike]: `%${category}%` } },
-        include: Product,
-      });
-      res.status(200).json(productCat);
-    } else {
-      const productsDB = await Product.findAll({ include: Category });
-      res.status(200).json(productsDB);
+      where.name = { [Op.iLike]: `%${name}%` };
     }
+    if (gender) {
+      where.gender = { [Op.iLike]: `%${gender}%` };
+    }
+    if (category) {
+      where.category_id = category;
+    }
+
+    const productsDB = await Product.findAll({ include: Category, where });
+    res.status(200).json(productsDB);
   } catch (error) {
     res.status(400).json({
       error: error.message,
