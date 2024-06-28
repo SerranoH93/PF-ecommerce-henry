@@ -26,6 +26,18 @@ const nextConfig = {
                 port: "",
                 pathname: "/**"
             },
+            {
+                protocol: "https",
+                hostname: "revston.b-cdn.net",
+                port: "",
+                pathname: "/**"
+            },
+            {
+                protocol: "https",
+                hostname: "ark8.net",
+                port: "",
+                pathname: "/**"
+            }
         ],
     }
 };
