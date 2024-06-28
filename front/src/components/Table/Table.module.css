@@ -1,0 +1,70 @@
+.tableContainer {
+    margin-bottom: 16px;
+    /* Espaciado inferior */
+}
+
+.customTable {
+    width: 100%;
+    /* Ancho completo */
+    border-collapse: collapse;
+    /* Colapsar bordes de celda */
+    background-color: #ffffff;
+    /* Fondo blanco */
+}
+
+.customTable th,
+.customTable td {
+    border: 1px solid #ddd;
+    /* Borde delgado gris */
+    padding: 8px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Alineación centrada */
+}
+
+.customTable th {
+    background-color: #b3e0f2;
+    /* Fondo celeste para headers */
+    font-weight: bold;
+    /* Texto en negrita */
+}
+
+.createButton {
+    background-color: #1890ff;
+    /* Color de fondo azul */
+    color: #ffffff;
+    /* Color de texto blanco */
+    border: none;
+    /* Sin borde */
+    padding: 8px 16px;
+    /* Espaciado interno */
+    margin-bottom: 16px;
+    /* Espaciado inferior */
+    cursor: pointer;
+    /* Cursor de puntero */
+}
+
+.createButton:hover {
+    background-color: #40a9ff;
+    /* Color de fondo azul claro al pasar el mouse */
+}
+
+.actionButton {
+    background-color: #f5222d;
+    /* Color de fondo rojo */
+    color: #ffffff;
+    /* Color de texto blanco */
+    border: none;
+    /* Sin borde */
+    padding: 4px 8px;
+    /* Espaciado interno */
+    margin-right: 4px;
+    /* Margen derecho */
+    cursor: pointer;
+    /* Cursor de puntero */
+}
+
+.actionButton:hover {
+    background-color: #ff4d4f;
+    /* Color de fondo rojo claro al pasar el mouse */
+}
