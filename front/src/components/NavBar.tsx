@@ -28,8 +28,24 @@ export default function NavBar() {
   //     }
   //   };
 
-  //   fetchfilters();
-  // }, []);
+                <ul className="flex gap-5 " >
+                    <li>
+                        <Link href='/product' className="text-white">
+                            Crear
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/usuario' className="text-white">
+                            Usuario
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/carrito' className="text-white">
+                            Carrito
+                        </Link>
+                    </li>
+                </ul>
+            </div>
 
   return (
     <nav className="">

@@ -1,9 +1,9 @@
 const { z } = require('zod');
 
-const newProductSchema = z.object({
+const productSchema = z.object({
     name: z
         .string({
-            required_error: "El Nombr es obligatorio",
+            required_error: "El Nombre es obligatorio",
         })
         .min(3, {
             message: 'El nombre debe contener al menos 3 caracteres'
@@ -42,7 +42,10 @@ const newProductSchema = z.object({
     active: z.boolean().or(z.string().transform(s => s === 'true')), //! Revisar validación cuando se implemente con el back
     size: z.coerce.number({
             requiredError: 'Talla obligatorio'
-        })
+        }),
+    category: z.string({
+        required_error: 'La categoería es obligatoria'
+    })
 })
 
-module.exports = newProductSchema;
+module.exports = productSchema;

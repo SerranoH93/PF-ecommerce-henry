@@ -18,7 +18,7 @@ const uploadImage = async (model, uniqueField, fileBuffer, index) => {
                 options.folder = 'products';
                 options.unique_filename = false;
                 break;
-            // Agrega más modelos aquí cuando si es
+            //* Agrega más modelos aquí
             
             default:
                 return rej(new Error('Unsupported model type'));

@@ -35,7 +35,8 @@ async function createProducts(products) {
     for (let productData of products) {
         const { name, description, images, stock, price, gender, category } = productData;
 
-        const categoryInstance = await Category.findOne({ where: { name: category } });
+        const categoryToLowerCase = category.toLowerCase()
+        const categoryInstance = await Category.findOne({ where: { name: categoryToLowerCase } });
         console.log(categoryInstance)
         if (!categoryInstance) {
             throw new Error(`Caregoria ${category} no encontrada.`);

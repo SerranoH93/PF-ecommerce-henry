@@ -74,7 +74,7 @@
         "stock": 4,
         "price": 9000,
         "gender": "Masculino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Remera TRADI MOSTAZA",
@@ -85,7 +85,7 @@
         "stock": 7,
         "price": 9000,
         "gender": "Masculino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Remera KABAL TEE BORDO",
@@ -96,7 +96,7 @@
         "stock": 4,
         "price": 9000,
         "gender": "Masculino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Remera BUTTERFLY TEE LILA",
@@ -107,7 +107,7 @@
         "stock": 6,
         "price": 7000,
         "gender": "Femenino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Remera Lovers",
@@ -118,7 +118,7 @@
         "stock": 6,
         "price": 6000,
         "gender": "Femenino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Remera CHACHACHA",
@@ -129,7 +129,7 @@
         "stock": 6,
         "price": 6000,
         "gender": "Femenino",
-        "category": "Remeras"
+        "category": "Rameras"
     },
     {
         "name": "Chaqueta LIBRAS ESTERLINAS",

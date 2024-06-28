@@ -1,8 +1,8 @@
 [
-    { "name": "Pantalones" },
-    { "name": "Remeras" },
-    { "name": "Chaquetas" },
-    { "name": "Buzos" },
-    { "name": "Faldas" },
-    { "name": "Camisas" }
+    { "name": "pantalones" },
+    { "name": "rameras" },
+    { "name": "chaquetas" },
+    { "name": "buzos" },
+    { "name": "faldas" },
+    { "name": "camisas" }
 ]
