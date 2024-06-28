@@ -1,16 +1,13 @@
+'use client'
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useMatch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import Sider from '@/components/Layout/Sider/Sider';
 import Content from '@/components/Layout/Content/Content';
 import Button from '@/components/Button/Button';
 import TableComponent from '@/components/Table/Table';
-import './dashboard.module.css';
-
-
 
 const Dashboard: React.FC = () => {
-  let match = useMatch('/admin/*');
-
   const [productsData, setProductsData] = useState([]);
   const [usersData, setUsersData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
@@ -29,7 +26,7 @@ const Dashboard: React.FC = () => {
       .then((response) => response.json())
       .then((data) => setOrdersData(data));
 
-    // Deje la llamada para categorías comentada hasta que la habiliten en el backend
+    // Dejé la llamada para categorías comentada hasta que la habiliten en el backend
     // fetch('http://localhost:3000/admin/categories')
     //   .then((response) => response.json())
     //   .then((data) => setCategoriesData(data));
@@ -110,39 +107,31 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="dashboard">
-      <Sider defaultSelectedKey="products" />
-      <Content>
-        <Routes>
-          <Route path="products" element={
-            <div>
-              <h2>Productos</h2>
-              <Button type="primary">Crear Producto</Button>
-              <TableComponent data={productsData} columns={productsColumns} />
-            </div>
-          } />
-          <Route path="users" element={
-            <div>
-              <h2>Usuarios</h2>
-              <TableComponent data={usersData} columns={usersColumns} />
-            </div>
-          } />
-          <Route path="orders" element={
-            <div>
-              <h2>Órdenes</h2>
-              <TableComponent data={ordersData} columns={ordersColumns} />
-            </div>
-          } />
-          <Route path="categories" element={
-            <div>
-              <h2>Categorías</h2>
-              <Button type="primary">Crear Categoría</Button>
-              <TableComponent data={categoriesData} columns={categoriesColumns} />
-            </div>
-          } />
-        </Routes>
-      </Content>
-    </div>
+    <Router>
+      <div className="dashboard">
+        <Sider defaultSelectedKey="products" />
+        <Content>
+          <div>
+            <h2>Productos</h2>
+            <Button type="primary">Crear Producto</Button>
+            <TableComponent data={productsData} columns={productsColumns} />
+          </div>
+          <div>
+            <h2>Usuarios</h2>
+            <TableComponent data={usersData} columns={usersColumns} />
+          </div>
+          <div>
+            <h2>Órdenes</h2>
+            <TableComponent data={ordersData} columns={ordersColumns} />
+          </div>
+          <div>
+            <h2>Categorías</h2>
+            <Button type="primary">Crear Categoría</Button>
+            <TableComponent data={categoriesData} columns={categoriesColumns} />
+          </div>
+        </Content>
+      </div>
+    </Router>
   );
 };
 

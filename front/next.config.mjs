@@ -19,7 +19,26 @@ const nextConfig = {
                 hostname: "lh3.googleusercontent.com",
                 port: "",
                 pathname: "/**"
+            },
+            {
+                protocol: "https",
+                hostname: "revston.b-cdn.net",
+                port: "",
+                pathname: "/**"
+            },
+            {
+                protocol: "https",
+                hostname: "acdn.mitiendanube.com",
+                port: "",
+                pathname: "/**"
+            },
+            {
+                protocol: "https",
+                hostname: "ark8.net",
+                port: "",
+                pathname: "/**"
             }
+
         ],
     }
 };

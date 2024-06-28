@@ -28,25 +28,24 @@ export default function NavBar() {
   //     }
   //   };
 
-                <ul className="flex gap-5 " >
-                    <li>
-                        <Link href='/product' className="text-white">
-                            Crear
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/usuario' className="text-white">
-                            Usuario
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/carrito' className="text-white">
-                            Carrito
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
+            //     <ul className="flex gap-5 " >
+            //         <li>
+            //             <Link href='/product' className="text-white">
+            //                 Crear
+            //             </Link>
+            //         </li>
+            //         <li>
+            //             <Link href='/usuario' className="text-white">
+            //                 Usuario
+            //             </Link>
+            //         </li>
+            //         <li>
+            //             <Link href='/carrito' className="text-white">
+            //                 Carrito
+            //             </Link>
+            //         </li>
+            //     </ul>
+            // </div>
   return (
     <nav className="">
       <div className="flex items-center justify-between flex-wrap bg-black px-6">

@@ -3,3 +3,9 @@
     padding: 24px;
     min-height: 360px;
 }
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

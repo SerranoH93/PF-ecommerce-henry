@@ -1,5 +1,6 @@
+
 import React from 'react';
-import styles from './styles/Content.module.css';
+import styles from './Content.module.css';
 
 interface ContentProps {
   children: React.ReactNode;

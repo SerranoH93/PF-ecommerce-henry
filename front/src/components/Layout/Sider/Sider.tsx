@@ -10,7 +10,6 @@ interface SiderProps {
 const Sider: React.FC<SiderProps> = ({ defaultSelectedKey }) => {
   return (
     <div className={styles.sider}>
-      <div className={styles.logo}>Logo</div>
       <ul className={styles.menu}>
         <li className={defaultSelectedKey === 'products' ? 'active' : ''}>
           <Link to="/admin/products">Productos</Link>
