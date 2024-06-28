@@ -19,7 +19,6 @@ const getFilter = async (req, res) => {
 
     const productsDB = await Product.findAll({ include: Category, where });
     res.status(200).json(productsDB);
-
   } catch (error) {
     res.status(400).json({
       error: error.message,
