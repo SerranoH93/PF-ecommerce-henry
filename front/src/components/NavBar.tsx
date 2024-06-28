@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import SearchBar from '@/components/SearchBar'
+import SearchBar from '@/components/SearchBar/SearchBar'
 import Logo from "@/assets/Group 8.svg"
 
 export default function NavBar() {
@@ -23,8 +23,8 @@ export default function NavBar() {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/login' className="text-white">
-                            Login
+                        <Link href='/usuario' className="text-white">
+                            Usuario
                         </Link>
                     </li>
                     <li>

@@ -1,9 +1,9 @@
 const { z } = require('zod');
 
-const newProductSchema = z.object({
+const productSchema = z.object({
     name: z
         .string({
-            required_error: "El Nombr es obligatorio",
+            required_error: "El Nombre es obligatorio",
         })
         .min(3, {
             message: 'El nombre debe contener al menos 3 caracteres'
@@ -17,12 +17,12 @@ const newProductSchema = z.object({
         })
         .min(20, {
             message: 'La descripción debe tener al menos 20 caracteres'
-        }).max(150, {
+        })
+        .max(150, {
             message: 'La descripción no debe contener más de 50 caracteres',
         }),
     price: z
-        .coerce
-        .number({
+        .coerce.number({
             requiredError: 'El precio es obligatorio'
         }),
     gender: z
@@ -39,11 +39,13 @@ const newProductSchema = z.object({
         .coerce.number({
             requiredError: 'Stock es obligatorio'
         }),
-    active: z.boolean().or(z.string().transform(s => s === 'true')),
+    active: z.boolean().or(z.string().transform(s => s === 'true')), //! Revisar validación cuando se implemente con el back
     size: z.coerce.number({
             requiredError: 'Talla obligatorio'
-        })
+        }),
+    category: z.string({
+        required_error: 'La categoería es obligatoria'
+    })
 })
 
-
-module.exports = newProductSchema;
+module.exports = productSchema;

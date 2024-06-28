@@ -11,52 +11,14 @@ interface Product {
   images: string[];
 }
 
-const Cards: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+interface CardsProps {
+  products: Product[];
+}
+
+const Cards: React.FC<CardsProps> = ({products}) => {
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage: number = 15;
-
-  useEffect(() => {
-    let isMounted = true;
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3002/products/');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (isMounted) {
-          if (Array.isArray(data)) {
-            setProducts(data);
-          } else {
-            console.error('Expected array but received:', data);
-          }
-          setLoading(false);
-        }
-      } catch (error) {
-        if (isMounted) {
-          console.error('Error fetching products:', error);
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!Array.isArray(products)) {
-    return <p>Error: Unexpected data format</p>;
-  }
-
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
