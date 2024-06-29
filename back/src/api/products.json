@@ -383,5 +383,104 @@
         "price": 22000,
         "gender": "Femenino",
         "category": "Camisas"
+    },
+    {
+        "name": "T-Shirt premium casual",
+        "description": "Estilo ajustado, manga larga raglán en contraste, placket henley de tres botones, tela ligera y suave.",
+        "images": [
+            "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+        ],
+        "stock": 7,
+        "price": 8000,
+        "gender": "Masculino",
+        "category": "Rameras"
+    },
+    {
+        "name": "Chaqueta de algodón",
+        "description": "Excelentes chaquetas de exterior para primavera/otoño/invierno, adecuadas para muchas ocasiones, como trabajo, senderismo u otras actividades al aire libre.",
+        "images": [
+            "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+        ],
+        "stock": 9,
+        "price": 20000,
+        "gender": "Masculino",
+        "category": "Chaquetas"
+    },
+    {
+        "name": "T-Shirt manga larga casual",
+        "description": "El color puede ser ligeramente diferente entre la pantalla y la práctica. / Tenga en cuenta que la constitución corporal varía según la persona.",
+        "images": [
+            "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+        ],
+        "stock": 4,
+        "price": 9500,
+        "gender": "Masculino",
+        "category": "Rameras"
+    },
+    {
+        "name": "BIYLACLESEN Chaquetas de snowboard",
+        "description": "Capucha ajustable y desmontable y puño ajustable para evitar el viento y el agua, para un ajuste cómodo. Es adecuado para diferentes estaciones y te ayuda a adaptarte a diferentes climas.",
+        "images": [
+            "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg"
+        ],
+        "stock": 3,
+        "price": 27000,
+        "gender": "Femenino",
+        "category": "Chaquetas"
+    },
+    {
+        "name": "Chaqueta de motociclista de cuero sintético",
+        "description": "Material de cuero sintético para estilo y comodidad / 2 bolsillos frontales, chaqueta de cuero sintético estilo denim con capucha 2 en 1.",
+        "images": [
+            "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg"
+        ],
+        "stock": 3,
+        "price": 27500,
+        "gender": "Femenino",
+        "category": "Chaquetas"
+    },
+    {
+        "name": "Chaqueta de lluvia, rompevientos, con rayas",
+        "description": "Ligero, perfecto para viajes o uso casual---Manga larga con capucha, diseño de cintura ajustable con cordón. Capucha forrada de algodón con cordones ajustables.",
+        "images": [
+            "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg"
+        ],
+        "stock": 5,
+        "price": 26000,
+        "gender": "Femenino",
+        "category": "Chaquetas"
+    },
+    {
+        "name": "Camiseta de manga corta con cuello V",
+        "description": "Tela ligera con gran elasticidad para comodidad, acanalado en las mangas y el cuello / doble costura en el dobladillo inferior.",
+        "images": [
+            "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg"
+        ],
+        "stock": 5,
+        "price": 6500,
+        "gender": "Femenino",
+        "category": "Rameras"
+    },
+    {
+        "name": "Camiseta de manga corta Opna",
+        "description": "Tela ligera y suave con un cómodo cuello en V y un ajuste más delgado, ofrece una silueta más femenina y mayor comodidad.",
+        "images": [
+            "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg"
+        ],
+        "stock": 8,
+        "price": 5000,
+        "gender": "Femenino",
+        "category": "Rameras"
+    },
+    {
+        "name": "Camiseta casual de algodón",
+        "description": "La tela es suave y tiene algo de elasticidad. Ocasión: Casual/Oficina/Playa/Escuela/Hogar/Calle. Temporada: Primavera, Verano, Otoño, Invierno.",
+        "images": [
+            "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
+        ],
+        "stock": 10,
+        "price": 5500,
+        "gender": "Femenino",
+        "category": "Rameras"
     }
 ]
