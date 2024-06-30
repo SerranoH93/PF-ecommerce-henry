@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
-import SearchBar from '@/components/SearchBar'
+import SearchBar from '@/components/SearchBar/SearchBar'
 import Logo from "@/assets/Group 8.svg"
 import { useUser } from "@auth0/nextjs-auth0/client"
 import axios from "axios"
