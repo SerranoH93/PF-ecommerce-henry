@@ -10,10 +10,8 @@ interface ProductCard {
   id: string;
   name: string;
   price: number;
-  imageUrl: string;
-  
+  imageUrl: string;  
 }
-
 
 const Card: React.FC<ProductCard> = ({ id, name, price, imageUrl }) => {
   return (
