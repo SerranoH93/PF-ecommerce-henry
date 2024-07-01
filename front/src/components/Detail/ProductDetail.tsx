@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import styles from './ProductDetail.module.css';
+import AddToCart from '../AddToCart/AddToCart';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   price: number;
@@ -20,6 +22,8 @@ const ProductDetail: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);  
   const { id } = useParams();
+  const { user } = useUser();
+  const quantity = 1;
 
   useEffect(() => {
     if (id) {
@@ -67,6 +71,7 @@ const ProductDetail: React.FC = () => {
         <p>Talle: {product.size}</p>
         <p>Género: {product.gender}</p>
         <p>Stock: {product.stock}</p>
+        <AddToCart product={product} quantity={quantity} user={user}/>
       </div>
     </div>
   );
