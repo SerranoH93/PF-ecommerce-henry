@@ -4,13 +4,14 @@ import Image from "next/image"
 import SearchBar from '@/components/SearchBar/SearchBar'
 import Logo from "@/assets/Group 8.svg"
 
+
 export default function NavBar() {
     return (
         <nav className="">
             <div className="flex items-center justify-between flex-wrap bg-black px-6"> {/* Cambié p-6 a px-6 */}
                 <Link href='/'>
                     <div className="h-16 w-auto"> {/* Contenedor del logo */}
-                        <Image src={Logo} alt="logoModaUrbana" className="h-full w-auto object-contain" />
+                        <Image src={Logo} priority={true} alt="logoModaUrbana" className="h-full w-auto object-contain" />
                     </div>
                 </Link>
 
@@ -18,8 +19,8 @@ export default function NavBar() {
 
                 <ul className="flex gap-5 " >
                     <li>
-                        <Link href='/product' className="text-white">
-                            Crear
+                        <Link href='/dashboard' className="text-white">
+                            Mi Panel
                         </Link>
                     </li>
                     <li>

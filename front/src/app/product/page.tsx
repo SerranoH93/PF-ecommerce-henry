@@ -1,4 +1,4 @@
-import { CreateProduct } from "@/components/ProductForm/createProduct"
+import  {CreateProduct}  from "@/components/ProductForm/CreateProduct"
 
 const CreateProductPage: React.FC = () =>{
     return (
