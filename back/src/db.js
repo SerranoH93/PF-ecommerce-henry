@@ -60,7 +60,7 @@ Review.belongsTo(User, { foreignKey: 'user_id' });
 
 Product.hasMany(Review, { foreignKey: 'product_id' });
 Review.belongsTo(Product, { foreignKey: 'product_id' });
-
+ 
 User.hasMany(ShoppingCart, { foreignKey: 'user_id' });
 ShoppingCart.belongsTo(User, { foreignKey: 'user_id' });
 
@@ -73,5 +73,7 @@ Notification.belongsTo(User, { foreignKey: 'user_id' });
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
     User,
+    ShoppingCart,
+    Product,
     conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };

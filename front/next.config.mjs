@@ -43,7 +43,13 @@ const nextConfig = {
                 hostname: "fakestoreapi.com",
                 port: "",
                 pathname: "/**"
-            }
+            },
+            {
+                protocol: "http",
+                hostname: "revston.b-cdn.net",
+                port: "",
+                pathname: "/**"
+            },
         ],
     }
 };
