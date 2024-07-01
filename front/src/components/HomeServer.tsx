@@ -6,7 +6,7 @@ export default async function HomeServer() {
     const user = session?.user;
     console.log(user)   
 
-    const response = await fetch('http://localhost:3002/products/');
+const response = await fetch('http://localhost:3002/products/');
     const initialProducts = await response.json();
 
     return (

@@ -13,6 +13,7 @@ type ProductFormInputs = {
     active: boolean;
     size: number;
     images: FileList;
+    categorias: [];
 };
 
 const CreateProduct: React.FC = () => {
@@ -32,6 +33,7 @@ const CreateProduct: React.FC = () => {
     formData.append('stock', data.stock.toString());
     formData.append('active', data.active?.toString() ?? false);
     formData.append('size', data.size.toString());
+    formData.append('categorias' data.categorias.toString());
 
     if (data.images && data.images.length > 0) {
       formData.append('images', data.images[0]);
@@ -54,6 +56,7 @@ const CreateProduct: React.FC = () => {
       alert('Error creating product');
     }
   };
+  
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value)
@@ -116,6 +119,31 @@ const CreateProduct: React.FC = () => {
           {errors.images && <p>{errors.images.message}</p>}
           {preview && <img src={preview as string} alt="Image Preview" width="100" />}
         </div>
+        <div>
+          <label>Seleccione una categoria</label>
+          <div>
+            {driver.teams.map((team) => (
+              <span key={`teamCard_${team}`} onClick={handleTeamClick}>
+                {team}
+              </span>
+            ))}
+          </div>
+          <select
+            defaultValue="Seleccione la categoria que quieras agregar"
+            onChange={handleTeamChange}
+          >
+            <option value="default">
+              Seleccione la categoria que quieras agregar
+            </option>
+            {allTeams.map((team) => (
+              <option key={team} value={team}>
+                {team}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
 
         <div className='flex justify-center'>
           <button type="submit" className='border-2 bg-violet-700 p-3 my-3 font-black uppercase hover:bg-violet-900'>Create Product</button>
