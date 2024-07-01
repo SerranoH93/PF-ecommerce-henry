@@ -5,11 +5,16 @@ import Image from 'next/image';
 import styles from './Card.module.css'
 import ButtonCart from '@/components/ButtonCart/ButtonCart'
 import estrellitas from '@/assets/estrellita.png'
+import Link from 'next/link';
 interface ProductCard {
-  id: number;
+  id: string;
   name: string;
   price: number;
   imageUrl: string;
+  description: string;
+  gender: string;
+  size: number;
+  stock: number;
 }
 
 
@@ -34,7 +39,9 @@ const Card: React.FC<ProductCard> = ({ id, name, price, imageUrl }) => {
           <span>${price}</span>
 
         </div>
-        <ButtonCart />
+        <Link href={`/productDetail/${id}`} passHref>
+          <ButtonCart />
+        </Link>
       </div>
     </div>
   );

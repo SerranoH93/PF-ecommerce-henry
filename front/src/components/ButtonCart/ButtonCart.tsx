@@ -17,7 +17,9 @@ const Button = ({type = 'button', disabled = false, className = '' }) => {
                 stroke-linecap="round"
                 ></path>
                 </svg>
-                <span>Comprar</span>
+
+                <span>ver mas</span>
+
             </button>
 )}
 
