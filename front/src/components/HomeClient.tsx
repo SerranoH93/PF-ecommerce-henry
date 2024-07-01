@@ -7,7 +7,7 @@ import useFetchProducts from '@/Hooks/useFetchProducts';
 import Carousel from './Carousel/Carousel';
 
 interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     images: string[];
