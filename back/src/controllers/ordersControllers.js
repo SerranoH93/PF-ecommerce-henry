@@ -1,5 +1,6 @@
-const { Product, Category ,ShoppingCart } = require('../db');
-const { Op, where } = require('sequelize');
+const { Sequelize } = require('sequelize');
+const { Product, ShoppingCart, User } = require('../db');
+
 
 const getAllOrders = async (req, res) => {
     try {
@@ -17,18 +18,21 @@ const addProduct = async (req, res) => {
             return res.status(404).send("Order not found");
         }
         
-        const { product, quantity } = orden;
-        const { id, stock, active } = product;
-
+        const { product, quantity, user } = orden;
+        const { id: product_id, stock, active } = product;
+        const { id: user_id } = user;
+        
         if (!stock || !active) {
             return res.status(200).send("Product out of stock / Product unavailable");
         } else {
             const addedProduct = await ShoppingCart.create({
-                id,
+                user_id,
+                product_id,
                 quantity
             });
+        
 
-            return res.status(201).json(addedProduct);
+        return res.status(201).json(addedProduct);
         }    
     } catch (error) {
         console.error('Error in addProduct:', error);
