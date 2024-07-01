@@ -4,7 +4,13 @@ const { Product, ShoppingCart, User } = require('../db');
 
 const getAllOrders = async (req, res) => {
     try {
-        res.status(200).json({message: 'order/getAllOrders '});
+        const shoppingCartItems = await ShoppingCart.findAll();
+
+        if (!shoppingCartItems){
+            res.status(404).send("No items in the car")
+        }
+
+        res.status(200).json(shoppingCartItems);
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
