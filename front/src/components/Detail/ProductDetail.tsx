@@ -57,7 +57,22 @@ const ProductDetail: React.FC = () => {
   if (!product) {
     return <p>Error: Producto no encontrado</p>;
   }
+  const handlePay =  async () => {
+    console.log(product)
+    const res = await fetch( `http://localhost:3002/checkout` , {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: {
+        "content-Type": "application/json"
+      }
+      
+    })
+    const session = await res.json()
+      window.location = session.url
+   
+  }
 
+  
   return (
     <div className={styles.productDetail}>
       <div className={styles.productImage}>
@@ -72,6 +87,12 @@ const ProductDetail: React.FC = () => {
         <p>Género: {product.gender}</p>
         <p>Stock: {product.stock}</p>
         <AddToCart product={product} quantity={quantity} user={user}/>
+      </div>
+      <div>
+            <button
+            className='bg-green-500 text-white px-4 py-2 rounded-md mt-4 w-full'
+            onClick={() => handlePay() }
+                >Pagar</button>
       </div>
     </div>
   );
