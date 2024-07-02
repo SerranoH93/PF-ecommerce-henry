@@ -1,12 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import SearchBar from "@/components/SearchBar/SearchBar";
 import Logo from "@/assets/Group 8.svg";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import axios from "axios";
 import { useEffect } from "react";
-
 
 export default function NavBar() {
   const { user } = useUser();
@@ -29,7 +27,6 @@ export default function NavBar() {
             />
           </div>
         </Link>
-
 
         <ul className="flex gap-5">
           {!user && (
@@ -67,5 +64,4 @@ export default function NavBar() {
       </div>
     </nav>
   );
-
 }
