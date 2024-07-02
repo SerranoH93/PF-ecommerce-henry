@@ -3,7 +3,7 @@
 ![Moda Urbana](https://res.cloudinary.com/dx8jtgdtt/image/upload/v1719278809/eripedcaatfnbn6sdltp.jpg)
 
 # Moda urbana
-#### Bienvenido a "Circle", la página definitiva para encontrar la mejor ropa para toda la familia. <br>
+#### Bienvenido a "Moda Urbana", la página definitiva para encontrar la mejor ropa para toda la familia. <br>
 <p align="justify"> Moda Urbana es una aplicación de comercio electrónico diseñada para ofrecer una experiencia de compra en línea fluida y atractiva. Esta aplicación permite a los usuarios explorar una amplia variedad de productos de moda, buscar artículos específicos, y realizar compras de manera segura y conveniente.<br>
 
 ## 🚀 Nuestro equipo
