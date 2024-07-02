@@ -36,9 +36,10 @@ const registerUser = async (req, res) => {
     }
 };
 
-const getUser = async (req, res) => {
+const getUser = async (req, res) => {    
     try {
-        const { email } = req.query;
+        const { email } = req.query;   
+        // const { email } = req.query;     
 
         if (!email) {
             return res.status(400).json({ message: 'Email is required' });
