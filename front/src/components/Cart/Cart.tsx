@@ -82,16 +82,7 @@ const Cart = () => {
       quantity: cartProduct.quantity,
     };
   };
-  const handlePay =  async (order) => {
-    
-    const res = await fetch( 'http://localhost:3002/checkout' , {
-      method: "POST",
-      body: JSON.stringify(order),
-      headers: {
-        "content-Type": "application/json"
-      }
-    })
-  }
+
 
   return (
     <div className="bg-black text-white min-h-screen p-8">
@@ -146,13 +137,7 @@ const Cart = () => {
                 <p className="text-xl font-semibold">${totalPrice}</p>
               </div>
             </div>
-            <div>
-            <button
-            className='bg-green-500 text-white px-4 py-2 rounded-md mt-4 w-full'
-            onClick={() => handlePay(order)}
-          >Pagar</button>
-            </div>
-
+            
           </div>
         )}
 
