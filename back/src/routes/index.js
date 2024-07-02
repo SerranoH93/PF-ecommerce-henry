@@ -7,6 +7,7 @@ const adminRouter = require('./adminRouter');
 const orderRouter = require('./orderRouter');
 const filterRoute = require("./filterRouter");
 const paymentRoute = require("./stripeRouter");
+const webhookRoute = require("./webhookRouter");
 
 router.use("/products", productsRouter);
 router.use("/categories", categoriesRoute);
@@ -16,5 +17,6 @@ router.use('/user', userRouter)
 router.use('/order', orderRouter)
 router.use('/filter', filterRoute)
 router.use('/create-checkout-session', paymentRoute)
+router.use('/webhook', webhookRoute)
 
 module.exports = router;

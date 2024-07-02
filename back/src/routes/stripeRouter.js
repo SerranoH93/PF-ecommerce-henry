@@ -3,6 +3,6 @@ const { processPayment } = require("../controllers/stripetController");
 
 const paymentRoute = Router();
 
-paymentRoute.post("/",processPayment)
+paymentRoute.post("/", processPayment)
 
 module.exports = paymentRoute;
