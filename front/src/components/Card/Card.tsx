@@ -22,17 +22,9 @@ const Card: React.FC<ProductCard> = ({ id, name, price, imageUrl }) => {
       <div className={styles.title}>
         <h2 className={styles.productName}>{name}</h2>
       </div>
-      <div className={styles.punctuation}>
-        <Image src={estrellitas} alt='punctuation' className={styles.estrellita} />
-        <Image src={estrellitas} alt='punctuation' className={styles.estrellita} />
-        <Image src={estrellitas} alt='punctuation' className={styles.estrellita} />
-        <Image src={estrellitas} alt='punctuation' className={styles.estrellita} />
-        <p> 4/5</p>
-      </div>
       <div className={styles.action}>
         <div className={styles.price}>
           <span>${price}</span>
-
         </div>
         <Link href={`/productDetail/${id}`} passHref>
           <ButtonCart />

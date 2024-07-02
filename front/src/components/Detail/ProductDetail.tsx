@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import styles from './ProductDetail.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import StripeCheckout from '../ButtonPay/StripeCheckout';
 
 export interface Product {
   id: string;
@@ -72,6 +73,7 @@ const ProductDetail: React.FC = () => {
         <p>Género: {product.gender}</p>
         <p>Stock: {product.stock}</p>
         <AddToCart product={product} quantity={quantity} user={user}/>
+        <StripeCheckout product={product}/>
       </div>
     </div>
   );
