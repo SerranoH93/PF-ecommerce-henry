@@ -1,4 +1,3 @@
-"use client";
 import React, { FC, useState } from "react";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 import axios from "axios";
@@ -54,12 +53,19 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
 
   return (
     <div>
-      <button onClick={handleAdd}>Agregar al Carrito</button>
+      <button
+        onClick={handleAdd}
+        className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Agregar al Carrito
+      </button>
       {showLoginMessage && (
-        <div>
-          <p>
+        <div className="mt-2">
+          <p className="text-white">
             Para agregar productos al carrito{" "}
-            <Link href="/api/auth/login">inicie sesión</Link>.
+            <Link href="/api/auth/login">
+              <p className="underline">inicie sesión.</p>
+            </Link>
           </p>
         </div>
       )}
