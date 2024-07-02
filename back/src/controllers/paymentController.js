@@ -8,7 +8,7 @@ const postPay = async (req, res) => {
   try {
     const body = await req.json()
     const session = await stripe.checkout.session.Create({
-      seccess_url:"http://localhost:3002/success",
+      seccess_url:"http://localhost:3000/success",
       line_items:[{
         price_data:{
           currency: "usd",
@@ -17,7 +17,7 @@ const postPay = async (req, res) => {
             imagen: [body.image],
             size: body.size,
           },
-          
+
         unit_amount: body.price,
         },
         quantity: body.quantity,
@@ -35,5 +35,5 @@ const postPay = async (req, res) => {
 }
 
 module.exports = {
-  postPay,
+  postPay
 }

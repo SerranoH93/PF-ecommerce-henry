@@ -24,7 +24,16 @@ interface MappedProduct {
   quantity: number;
 }
 
-const Cart = () => {
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+}
+
+
+
+const Cart = ()  => {
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -81,7 +90,10 @@ const Cart = () => {
       image: images[0], // Suponiendo que siempre tomamos la primera imagen
       quantity: cartProduct.quantity,
     };
-  };
+  }; 
+
+  
+  
 
   return (
     <div className="bg-black text-white min-h-screen p-8">
@@ -135,6 +147,7 @@ const Cart = () => {
                 <h2 className="text-xl font-semibold">Total a Pagar:</h2>
                 <p className="text-xl font-semibold">${totalPrice}</p>
               </div>
+               
             </div>
           </div>
         )}
