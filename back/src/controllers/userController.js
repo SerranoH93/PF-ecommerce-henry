@@ -1,4 +1,5 @@
 const { User } = require('../db');
+const emailer = require("../utils/nodemailerConfig");
 
 const registerUser = async (req, res) => {
     try {
@@ -16,12 +17,16 @@ const registerUser = async (req, res) => {
             return res.status(200).send("Existing User");
         } else {
             const newUser = await User.create({
-                email, 
+                email,
                 email_verified,
-                name, 
-                nickname, 
+                name,
+                nickname,
                 picture
             });
+
+            const message = "Gracias por registrarte en Moda Urbana"
+            const title = "Registro exitoso"
+            emailer.sendMail(newUser.email, newUser.name, message, title);
 
             return res.status(201).json(newUser);
         }
@@ -31,21 +36,21 @@ const registerUser = async (req, res) => {
     }
 };
 
-const getUser = async(req,res) =>{
+const getUser = async (req, res) => {
     try {
         const { email } = req.query;
 
-    if (!email) {
-      return res.status(400).json({ message: 'Email is required' });
-    }
+        if (!email) {
+            return res.status(400).json({ message: 'Email is required' });
+        }
 
-    const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } });
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-    res.status(200).json(user);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
@@ -62,7 +67,7 @@ const editUser = async (req, res) => {
         // const { email, name, nickname, picture } = user;
 
         // let existingUser = await User.findOne({ where: { email } });
-        
+
         // if (existingUser) {
         //     return res.status(200).send("Existing User");
         // } else {
@@ -87,4 +92,4 @@ module.exports = {
     registerUser,
     editUser,
     getUser
-    };
+};
