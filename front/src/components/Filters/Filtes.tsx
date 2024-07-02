@@ -46,44 +46,66 @@ const Filters: React.FC<FiltersProps>  = ({
     }, []);
 
     return (
-        <div>
-            <label htmlFor="">Buscar: </label>
-            <input 
-                type='text'
-                placeholder='Buscar por nombre'
-                value={nameFilter}
-                onChange={(e) => setNameFilter(e.target.value)}
-                className='text-black'
-            />
-
-            <label htmlFor="">Filtro por categoría: </label>
-            <select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className='text-black'
-            >
-                <option className='text-black' value="">Seleccionar categoría</option>
-                {categories.map((category) => (
-                    <option key={category.id} className='text-black' value={category.id}>
-                        {category.name}
-                    </option>
-                ))}
-            </select>
-
-            <label htmlFor="">Filtro por género: </label>
-            <select
-                value={genderFilter}
-                onChange={(e) => setGenderFilter(e.target.value)}
-                className='text-black'
-            >
-                <option className='text-black' value="">Seleccionar género</option>
-                <option  className='text-black' value="Masculino">Masculino</option>
-                <option className='text-black' value="Femenino">Femenino</option>
-            </select>
-
-            <button onClick={onSearch}>Buscar</button>
-            <button onClick={onClick}>Reiniciar filtros</button>
+        <div className="flex flex-col items-center gap-4 p-6">
+            <div className=" w-full max-w-sm">                
+                <input
+                    id="search"
+                    type='text'
+                    placeholder='Buscar por nombre'
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
+                    className="p-2 border border-gray-300 rounded w-full text-black"
+                />
+            </div>
+            <div className="flex gap-4">
+                <div>
+                    <label htmlFor="category" className="font-bold mb-2 block">Filtro por categoría: </label>
+                    <select
+                        id="category"
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                        className="p-2 border border-gray-300 rounded text-black w-full"
+                    >
+                        <option value="">Seleccionar categoría</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="gender" className="font-bold mb-2 block">Filtro por género: </label>
+                    <select
+                        id="gender"
+                        value={genderFilter}
+                        onChange={(e) => setGenderFilter(e.target.value)}
+                        className="p-2 border border-gray-300 rounded text-black w-full"
+                    >
+                        <option value="">Seleccionar género</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button
+                    onClick={onSearch}
+                    className="p-2 bg-[#FF9900] text-white rounded w-full max-w-sm"
+                >
+                    Buscar
+                </button>
+            </div>
+            <div>
+                <button
+                    onClick={onClick}
+                    className="text-white underline"
+                >
+                    Limpiar filtros
+                </button>
+            </div>
         </div>
+
     )
 }
 

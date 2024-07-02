@@ -50,6 +50,12 @@ const nextConfig = {
                 port: "",
                 pathname: "/**"
             },
+            {
+                protocol: "https",
+                hostname: "minnakazzira.com.ar",
+                port: "",
+                pathname: "/**"
+            }
         ],
     }
 };
