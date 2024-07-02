@@ -1,7 +1,9 @@
+import Cart from "@/components/Cart/Cart";
+
 export default function Carrito() {
-    return (
-        <h1>
-            Carrito
-        </h1>
-    )
+  return (
+    <div>
+      <Cart />
+    </div>
+  );
 }
