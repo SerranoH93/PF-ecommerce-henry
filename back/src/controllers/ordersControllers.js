@@ -71,9 +71,22 @@ const deleteOrder = async (req, res) => {
     }
 }
 
+const clearShoppingCart = async (req, res) => {
+  try {
+    await ShoppingCart.destroy({
+        where: {},
+        truncate: true
+      });
+    res.status(200).json({ message: 'Ordenes eliminadas' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+}
+
 module.exports = {
     getAllOrders,
     addProduct,
     increaceQuantity,
-    deleteOrder
+    deleteOrder,
+    clearShoppingCart
     };
