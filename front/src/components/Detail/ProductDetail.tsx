@@ -1,10 +1,10 @@
-'use client'
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import styles from './ProductDetail.module.css';
-import AddToCart from '../AddToCart/AddToCart';
-import { useUser } from '@auth0/nextjs-auth0/client';
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import AddToCart from "../AddToCart/AddToCart";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import StripeCheckout from "../ButtonPay/StripeCheckout";
 
 export interface Product {
   id: string;
@@ -69,15 +69,20 @@ const ProductDetail: React.FC = () => {
           className="object-cover rounded-md"
         />
       </div>
-      <div className={styles.productInfo}>
-        <h1>Detalle del Producto</h1>
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
-        <p>Precio: ${product.price}</p>
-        <p>Talle: {product.size}</p>
-        <p>Género: {product.gender}</p>
-        <p>Stock: {product.stock}</p>
-        <AddToCart product={product} quantity={quantity} user={user}/>
+      <div className="flex-1 text-white flex flex-col justify-between">
+        <div>
+          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <p className="mb-2">{product.description}</p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-lg">Precio: ${product.price}</p>
+          <p className="text-lg">Talle: {product.size}</p>
+          <p className="text-lg">Género: {product.gender}</p>
+          <p className="text-lg">Stock: {product.stock}</p>
+        </div>
+        <br />
+        <AddToCart product={product} quantity={quantity} user={user} />
+        <StripeCheckout product={product}/>
       </div>
     </div>
   );
