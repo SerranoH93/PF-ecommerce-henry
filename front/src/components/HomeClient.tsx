@@ -62,7 +62,10 @@ const HomeClient: React.FC<HomeClientProps> = ({ user, initialProducts }) => {
                 onClick={handleReset}
             />
             <h1 className="flex justify-center p-5 text-lg font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
-            <Cards products={products} />
+            <div className='mx-20'>
+                <Cards products={products} />
+            </div>
+            
         </div>
     );
 };

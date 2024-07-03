@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 import styles from './ProductDetail.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import StripeCheckout from '../ButtonPay/StripeCheckout';
 
 export interface Product {
   id: string;
@@ -21,7 +20,7 @@ export interface Product {
 const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);  
+  const [error, setError] = useState<string | null>(null);
   const { id } = useParams();
   const { user } = useUser();
   const quantity = 1;
@@ -32,12 +31,12 @@ const ProductDetail: React.FC = () => {
         try {
           const response = await fetch(`http://localhost:3002/products/${id}`);
           if (!response.ok) {
-            throw new Error('La respuesta de la red no fue satisfactoria');
+            throw new Error("La respuesta de la red no fue satisfactoria");
           }
           const data: Product = await response.json();
           setProduct(data);
         } catch (error) {
-          setError('Error al obtener el producto');
+          setError("Error al obtener el producto");
         } finally {
           setLoading(false);
         }
@@ -48,21 +47,27 @@ const ProductDetail: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <p className="text-white">Cargando...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className="text-red-500">{error}</p>;
   }
 
   if (!product) {
-    return <p>Error: Producto no encontrado</p>;
+    return <p className="text-red-500">Error: Producto no encontrado</p>;
   }
 
   return (
-    <div className={styles.productDetail}>
-      <div className={styles.productImage}>
-        <Image src={product.images[0]} alt={product.name} width={300} height={300} />
+    <div className="flex flex-col md:flex-row items-start border-4 border-black p-6 rounded-lg max-w-4xl mx-auto my-10 bg-gray-800 shadow-lg">
+      <div className="w-full md:w-1/2 mb-6 md:mb-0">
+        <Image
+          src={product.images[0]}
+          alt={product.name}
+          width={300}
+          height={300}
+          className="object-cover rounded-md"
+        />
       </div>
       <div className={styles.productInfo}>
         <h1>Detalle del Producto</h1>
@@ -73,7 +78,6 @@ const ProductDetail: React.FC = () => {
         <p>Género: {product.gender}</p>
         <p>Stock: {product.stock}</p>
         <AddToCart product={product} quantity={quantity} user={user}/>
-        <StripeCheckout product={product}/>
       </div>
     </div>
   );
