@@ -68,7 +68,7 @@ export default function UserProfile() {
             </p>
           </Link>
           <div className="font-bold py-2 px-4 rounded">
-            <EditUserProfile />
+            <EditUserProfile userEmail={userEmail} />
           </div>
         </div>
       </div>
