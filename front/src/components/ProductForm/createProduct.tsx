@@ -39,7 +39,7 @@ const CreateProduct: React.FC = () => {
 
     
     try {
-      const response = await fetch('http://localhost:3002/products/create', {
+      const response = await fetch('https://pf-ecommerce-henry.onrender.com/products/create', {
         method: 'POST',
         body: formData,
       });

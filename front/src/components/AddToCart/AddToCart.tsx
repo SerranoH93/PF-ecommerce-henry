@@ -20,10 +20,10 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
       return;
     }
 
-    const link = "http://localhost:3002/order/add";
+    const link = "https://pf-ecommerce-henry.onrender.com/order/add";
     try {
       const userDb = await axios.get(
-        `http://localhost:3002/user/by-email?email=${userEmail}`
+        `https://pf-ecommerce-henry.onrender.com/user/by-email?email=${userEmail}`
       );
 
       const userData = userDb.data;

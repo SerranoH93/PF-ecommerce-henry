@@ -23,7 +23,7 @@ const CheckoutForm: React.FC<StripeCheckoutProps> = ({ product }) => {
         if (!stripe) return;
 
         try {
-            const response = await fetch('http://localhost:3002/create-checkout-session', {
+            const response = await fetch('https://pf-ecommerce-henry.onrender.com/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

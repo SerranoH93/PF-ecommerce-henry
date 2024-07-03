@@ -40,13 +40,13 @@ const Cart = () => {
         // Obtener el usuario de la base de datos usando el correo electrónico
         const userEmail = user.email;
         const userResponse = await axios.get(
-          `http://localhost:3002/user/by-email?email=${userEmail}`
+          `https://pf-ecommerce-henry.onrender.com/user/by-email?email=${userEmail}`
         );
         const userData = userResponse.data;
         const userId = userData.id;
 
         // Obtener el carrito del usuario usando su ID
-        const linkGetCartProducts = `http://localhost:3002/order/?id=${userId}`;
+        const linkGetCartProducts = `https://pf-ecommerce-henry.onrender.com/order/?id=${userId}`;
 
         const cartResponse = await axios.get(linkGetCartProducts);
         const cartProducts = cartResponse.data;
@@ -54,7 +54,7 @@ const Cart = () => {
 
         // Obtener los detalles de cada producto en el carrito
         const productRequests = cartProducts.map((cartProduct: CartProduct) =>
-          axios.get(`http://localhost:3002/products/${cartProduct.product_id}`)
+          axios.get(`https://pf-ecommerce-henry.onrender.com/products/${cartProduct.product_id}`)
         );
 
         const productResponses = await Promise.all(productRequests);
@@ -101,7 +101,7 @@ const Cart = () => {
     console.log(productId);
     try {
       const deleteProductResponse = await axios.delete(
-        `http://localhost:3002/order/delete/${productId}`
+        `https://pf-ecommerce-henry.onrender.com/order/delete/${productId}`
       );
       if (deleteProductResponse.status === 200) {
         // Actualizar la lista de productos en el carrito después de la eliminación

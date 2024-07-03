@@ -16,7 +16,7 @@ const useFetchProducts = () => {
         setLoading(true);
         setError(null);
         try {
-            let url = 'http://localhost:3002/products/';
+            let url = 'https://pf-ecommerce-henry.onrender.com/products/';
 
             if (nameFilter || categoryFilter || genderFilter) {
                 const queryParams = new URLSearchParams({
@@ -25,7 +25,7 @@ const useFetchProducts = () => {
                     gender: genderFilter,
                 }).toString();
 
-                url = `http://localhost:3002/filter?${queryParams}`;
+                url = `https://pf-ecommerce-henry.onrender.com/filter?${queryParams}`;
             }
 
             const response = await fetch(url);

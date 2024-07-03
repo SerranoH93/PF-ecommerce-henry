@@ -28,7 +28,7 @@ const ProductDetail: React.FC = () => {
     if (id) {
       const fetchProduct = async () => {
         try {
-          const response = await fetch(`http://localhost:3002/products/${id}`);
+          const response = await fetch(`https://pf-ecommerce-henry.onrender.com/products/${id}`);
           if (!response.ok) {
             throw new Error("La respuesta de la red no fue satisfactoria");
           }

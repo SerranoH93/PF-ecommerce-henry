@@ -11,7 +11,7 @@ export default function NavBar() {
 
   useEffect(() => {
     if (user) {
-      axios.post("http://localhost:3002/user/register", { user });
+      axios.post("https://pf-ecommerce-henry.onrender.com/user/register", { user });
     }
   }, [user]);
 

@@ -24,7 +24,7 @@ export default function UserProfile() {
     if (userEmail) {
       axios
         .get(
-          `http://localhost:3002/user/by-email?email=${encodeURIComponent(
+          `https://pf-ecommerce-henry.onrender.com/user/by-email?email=${encodeURIComponent(
             userEmail
           )}`
         )

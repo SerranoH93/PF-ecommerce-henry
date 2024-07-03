@@ -37,7 +37,7 @@ const EditUserProfile: React.FC<EditUserProfileProps> = ({ userEmail }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3002/user/edit?email=${userEmail}`,
+        `https://pf-ecommerce-henry.onrender.com/user/edit?email=${userEmail}`,
         formData,
         {
           headers: {
