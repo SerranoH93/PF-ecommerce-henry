@@ -11,6 +11,8 @@ interface UserData {
   name: string;
   email: string;
   picture?: string;
+  address?: string;
+  phone?: string;
 }
 
 export default function UserProfile() {
@@ -61,6 +63,12 @@ export default function UserProfile() {
         <h3 className="text-lg text-center mt-2">
           {userData ? userData.email : user.email}
         </h3>
+        {userData && userData.address && (
+          <p className="text-center mt-2">{userData.address}</p>
+        )}
+        {userData && userData.phone && (
+          <p className="text-center mt-2">{userData.phone}</p>
+        )}
         <div className="text-center mt-4">
           <Link href="/api/auth/logout">
             <p className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
