@@ -1,7 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
-
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
@@ -16,6 +15,11 @@ const uploadImage = async (model, uniqueField, fileBuffer, index) => {
             case 'product':
                 options.public_id = `${uniqueField}_id_${index}`;
                 options.folder = 'products';
+                options.unique_filename = false;
+                break;
+            case 'user':
+                options.public_id = `${uniqueField}_id_${index}`;
+                options.folder = 'users';
                 options.unique_filename = false;
                 break;
             //* Agrega más modelos aquí
@@ -41,8 +45,7 @@ const uploadImage = async (model, uniqueField, fileBuffer, index) => {
             .end(fileBuffer);
     });
 
-    return result;
-    
+    return result;    
 };
 
 module.exports = uploadImage;

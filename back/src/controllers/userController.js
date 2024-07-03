@@ -1,4 +1,6 @@
 const { User } = require("../db");
+const validateImages = require('../validations/filesValidations');
+const uploadImage = require('../utils/cloudinaryConfiguration');
 
 const registerUser = async (req, res) => {
   try {
@@ -55,11 +57,11 @@ const getUser = async (req, res) => {
 const editUser = async (req, res) => {
   try {
     const { email } = req.query;
-    const { name, picture, phone, address } = req.body;
+    const { name, phone, address } = req.body;
 
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
-    }
+    }    
 
     const user = await User.findOne({ where: { email } });
 
@@ -67,10 +69,30 @@ const editUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    //* Validación para imagenes 
+    const validationResult = validateImages(req.files);
+    if (!validationResult.valid) {
+      return res.status(400).json({
+        message: "Uno o más archivos no son válidos.",
+        errors: validationResult.errors,
+      });
+    }
+
+    //* Si pasan las validaciones se guarda la imagen
+    const files = req.files;
+    const uniqueField = user.id;
+    const imagesUrl = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const fileBuffer = files[i].buffer;
+      const result = await uploadImage('user', uniqueField, fileBuffer, i);
+      imagesUrl.push(result.secure_url);
+    }
+
     await User.update(
       {
         name: name ?? user.name,
-        picture: picture ?? user.picture,
+        picture: imagesUrl[0],
         phone: phone ?? user.phone,
         address: address ?? user.address,
       },
