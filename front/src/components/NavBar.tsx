@@ -16,7 +16,7 @@ export default function NavBar() {
   }, [user]);
 
   return (
-    <nav className="">
+    <nav className="className= mt-3">
       <div className="flex items-center justify-between flex-wrap bg-black px-6">
         <Link href="/">
           <div className="h-16 w-auto">

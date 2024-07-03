@@ -51,6 +51,7 @@ const HomeClient: React.FC<HomeClientProps> = ({ user, initialProducts }) => {
     return (
         <div>
             <Carousel/>
+            <h1 className="flex justify-center mt-2 mb-5 p-5 text-6xl font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
             <Filters
                 nameFilter={nameFilter}
                 setNameFilter={setNameFilter}
@@ -60,8 +61,7 @@ const HomeClient: React.FC<HomeClientProps> = ({ user, initialProducts }) => {
                 setGenderFilter={setGenderFilter}
                 onSearch={handleSearch}
                 onClick={handleReset}
-            />
-            <h1 className="flex justify-center p-5 text-lg font-bold">CONOZCA NUESTROS PRODUCTOS</h1>
+            />            
             <div className='mx-20'>
                 <Cards products={products} />
             </div>
