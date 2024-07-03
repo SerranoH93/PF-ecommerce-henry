@@ -4,7 +4,8 @@ const { Product, ShoppingCart, User } = require('../db');
 
 const getAllOrders = async (req, res) => {
     try {
-        const {id} = req.body
+        const {id} = req.query
+        console.log(req.query)
         const user_id = id
         if (!user_id){
             res.status(404).send("El usuario no tiene carrito")

@@ -27,14 +27,11 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
       );
 
       const userData = userDb.data;
-      const userId = userData.id;
-      console.log(userData);
 
       const orden = {
         product,
         quantity,
         user: userData,
-        userId,
       };
       console.log("Enviando datos:", orden);
 
