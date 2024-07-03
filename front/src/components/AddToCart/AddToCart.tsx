@@ -33,6 +33,7 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
         product,
         quantity,
         user: userData,
+        userEmail, // Incluimos el email del usuario
       };
       console.log("Enviando datos:", orden);
 
@@ -64,7 +65,7 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
           <p className="text-white">
             Para agregar productos al carrito{" "}
             <Link href="/api/auth/login">
-              <p className="underline">inicie sesión.</p>
+              <span className="underline">inicie sesión.</span>
             </Link>
           </p>
         </div>
