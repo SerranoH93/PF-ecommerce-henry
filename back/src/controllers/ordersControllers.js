@@ -36,7 +36,6 @@ const addProduct = async (req, res) => {
                 product_id,
                 quantity
             });
-        
 
         return res.status(201).json(addedProduct);
         }    
@@ -46,17 +45,27 @@ const addProduct = async (req, res) => {
     }
 };
 
-const orderDetail = async (req, res) => {
+const increaceQuantity = async (req, res) => {
     try {
-        res.status(200).json({message: 'order/orderDetail'});
+        const {orden} = req.body
+
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
 }
 
 const deleteOrder = async (req, res) => {
-    try {
-        res.status(200).json({message: 'order/deleteOrder'});
+    const { id } = req.params; 
+  try {
+    const product = await ShoppingCart.findByPk(id);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
+    }
+
+    await product.destroy();
+
+    res.status(200).json({ message: 'Producto eliminado del carrito con éxito' });
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
@@ -65,6 +74,6 @@ const deleteOrder = async (req, res) => {
 module.exports = {
     getAllOrders,
     addProduct,
-    orderDetail,
+    increaceQuantity,
     deleteOrder
     };
