@@ -1,6 +1,7 @@
 const { User } = require("../db");
 const validateImages = require('../validations/filesValidations');
 const uploadImage = require('../utils/cloudinaryConfiguration');
+const emailer = require("../utils/nodemailerConfig");
 
 const registerUser = async (req, res) => {
   try {
@@ -24,6 +25,9 @@ const registerUser = async (req, res) => {
         nickname,
         picture,
       });
+      const message = "Gracias por registrarte en Moda Urbana"
+      const title = "Registro exitoso"
+      emailer.sendMail(newUser.email, newUser.name, message, title);
 
       return res.status(201).json(newUser);
     }

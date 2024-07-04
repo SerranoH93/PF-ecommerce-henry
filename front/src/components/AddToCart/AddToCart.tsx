@@ -8,9 +8,15 @@ interface ButtonCartProps {
   product: Product;
   quantity: number;
   user?: UserProfile | undefined;
+  onSuccess: () => void;
 }
 
-const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
+const AddToCart: FC<ButtonCartProps> = ({
+  product,
+  quantity,
+  user,
+  onSuccess,
+}) => {
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const userEmail = user?.email;
 
@@ -27,7 +33,6 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
       );
 
       const userData = userDb.data;
-      console.log(userData);
 
       const orden = {
         product,
@@ -45,6 +50,7 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
           },
         }
       );
+      onSuccess();
       console.log(sendToCart);
     } catch {
       console.error("no enviado");
@@ -64,7 +70,7 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
           <p className="text-white">
             Para agregar productos al carrito{" "}
             <Link href="/api/auth/login">
-              <p className="underline">inicie sesión.</p>
+              <span className="underline">inicie sesión.</span>
             </Link>
           </p>
         </div>

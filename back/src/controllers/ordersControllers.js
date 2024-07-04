@@ -4,7 +4,8 @@ const { Product, ShoppingCart, User } = require('../db');
 
 const getAllOrders = async (req, res) => {
     try {
-        const {id} = req.body
+        const {id} = req.query
+        console.log(req.query)
         const user_id = id
         if (!user_id){
             res.status(404).send("El usuario no tiene carrito")
@@ -53,23 +54,23 @@ const addProduct = async (req, res) => {
 
 const setQuantity = async (req, res) => {
     try {
-    const { id } = req.params; 
-    const order = await ShoppingCart.findByPk(id);
-    const {quantity} = req.body
-    if (!order) {
-        return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
-    }
-
-     await ShoppingCart.update(
-        {
-          quantity: quantity
-        },
-        {
-          where: { id },
+        const { id } = req.params;
+        const order = await ShoppingCart.findByPk(id);
+        const { quantity } = req.body
+        if (!order) {
+            return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
         }
-      ); 
 
-    res.status(200).send("Quantity Updated")
+        await ShoppingCart.update(
+            {
+                quantity: quantity
+            },
+            {
+                where: { id },
+            }
+        );
+
+        res.status(200).send("Quantity Updated")
 
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
@@ -77,29 +78,32 @@ const setQuantity = async (req, res) => {
 }
 
 const deleteOrder = async (req, res) => {
-    const { id } = req.params; 
-  try {
-    const product = await ShoppingCart.findByPk(id);
+    const { id } = req.params;
+    try {
+        const product = await ShoppingCart.findByPk(id);
 
-    if (!product) {
-      return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
-    }
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado en el carrito' });
+        }
 
-    await product.destroy();
+        await product.destroy();
 
-    res.status(200).json({ message: 'Producto eliminado del carrito con éxito' });
+        res.status(200).json({ message: 'Producto eliminado del carrito con éxito' });
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
 }
 
 const clearShoppingCart = async (req, res) => {
-  try {
-    await ShoppingCart.destroy({
-        where: {},
-        truncate: true
-      });
-    res.status(200).json({ message: 'Ordenes eliminadas' });
+
+    const { userId } = req.query;
+    
+    try {
+        await ShoppingCart.destroy({
+            where: { user_id: userId },
+            // truncate: true
+        });
+        res.status(200).json({ message: 'Ordenes eliminadas' });
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
