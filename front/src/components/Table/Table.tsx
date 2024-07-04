@@ -9,7 +9,7 @@ interface Item {
 }
 
 interface CategoryItem extends Item {
-  id: string; // Cambiamos el tipo de 'id' a 'string'
+  id: string; // Asegúrate de que el id sea string
 }
 
 export interface Column<T> {
@@ -60,3 +60,4 @@ const TableComponent = <T extends Item | CategoryItem>({ data, columns, onCreate
 };
 
 export default TableComponent;
+
