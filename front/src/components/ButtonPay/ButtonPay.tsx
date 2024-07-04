@@ -13,7 +13,7 @@ interface ButtonPayProps {
 const ButtonPay = ({ cartProducts, totalPrice }: ButtonPayProps) => {
   const handleCheckout = async () => {
     try {
-      const response = await axios.post("http://localhost:3002/order/create-checkout-session", {
+      const response = await axios.post("https://pf-ecommerce-henry.onrender.comorder/create-checkout-session", {
         cartProducts,
         totalPrice,
       });
@@ -25,7 +25,7 @@ const ButtonPay = ({ cartProducts, totalPrice }: ButtonPayProps) => {
         if (error) {
           console.error("Error in redirecting to checkout:", error);
         } else {
-          const clearCart = await axios.delete("http://localhost:3002/order/deleteAll")
+          const clearCart = await axios.delete("https://pf-ecommerce-henry.onrender.comorder/deleteAll")
         }
       }
     } catch (error) {
