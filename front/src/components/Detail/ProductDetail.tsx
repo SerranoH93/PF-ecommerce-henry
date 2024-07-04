@@ -117,7 +117,6 @@ const ProductDetail: React.FC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-lg">Precio: ${product.price}</p>
-            <p className="text-lg">Talle: {product.size}</p>
             <p className="text-lg">Género: {product.gender}</p>
             <p className="text-lg">Stock: {product.stock}</p>
           </div>
