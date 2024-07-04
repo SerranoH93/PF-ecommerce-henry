@@ -92,7 +92,7 @@ const editUser = async (req, res) => {
     await User.update(
       {
         name: name ?? user.name,
-        picture: imagesUrl[0],
+        picture: imagesUrl[0] ?? user.picture,
         phone: phone ?? user.phone,
         address: address ?? user.address,
       },
