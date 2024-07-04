@@ -2,7 +2,7 @@ const { Sequelize, where } = require('sequelize');
 const { Product, ShoppingCart, User } = require('../db');
 
 
-const getAllOrders = async (req, res) => {
+const getUserOrders = async (req, res) => {
     try {
         const {id} = req.query
         console.log(req.query)
@@ -98,21 +98,39 @@ const clearShoppingCart = async (req, res) => {
 
     const { userId } = req.query;
     
+    if(!userId){
+        res.status(404).send("No tiene carrito")
+    }
     try {
         await ShoppingCart.destroy({
-            where: { user_id: userId },
-            // truncate: true
-        });
-        res.status(200).json({ message: 'Ordenes eliminadas' });
+            where: { user_id: userId }
+    });
+
+    res.status(200).json({ message: 'Ordenes eliminadas' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error en la base de datos', error: error.message });
+    }
+}
+
+const getAllOrders = async (req, res) => {
+    try {
+        const shoppingCarts = await ShoppingCart.findAll({});
+
+        if (!shoppingCarts){
+            res.status(404).send("There are no shopping carts")
+        }
+
+        res.status(200).json(shoppingCarts);
     } catch (error) {
         res.status(500).json({ message: 'Error en la base de datos', error: error.message });
     }
 }
 
 module.exports = {
-    getAllOrders,
+    getUserOrders,
     addProduct,
     setQuantity,
     deleteOrder,
-    clearShoppingCart
+    clearShoppingCart,
+    getAllOrders
     };

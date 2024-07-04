@@ -1,8 +1,9 @@
 const { Router } = require('express');
-const { getAllOrders, addProduct, setQuantity, deleteOrder, clearShoppingCart } = require('../controllers/ordersControllers');
+const { getUserOrders, addProduct, setQuantity, deleteOrder, clearShoppingCart, getAllOrders } = require('../controllers/ordersControllers');
 const orderRouter = Router();
 
-orderRouter.get('/', getAllOrders);
+orderRouter.get('/', getUserOrders);
+orderRouter.get('/all', getAllOrders)
 orderRouter.post('/add', addProduct);
 orderRouter.put('/increase/:id', setQuantity);
 orderRouter.delete('/delete/:id', deleteOrder);

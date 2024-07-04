@@ -30,7 +30,15 @@ module.exports = (sequelize) => {
         },
         address: {
             type: DataTypes.STRING
-        }
+        },
+        isBanned:{
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        isAdmin:{
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
     }, {
         paranoid: true,
     });
