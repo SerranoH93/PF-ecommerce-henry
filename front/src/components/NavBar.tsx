@@ -17,21 +17,24 @@ export default function NavBar() {
 
   return (
     <nav className="mt-3">
-      <div className="flex items-center justify-between flex-wrap bg-black px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between bg-black px-6 py-4">
         <Link href="/">
-          <div className="h-16 w-auto">
+          <div className="h-16 w-auto cursor-pointer mb-4 md:mb-0">
             <Image
               src={Logo}
               alt="logoModaUrbana"
-              className="h-full w-auto object-contain"
+              className="h-full w-auto object-contain mx-auto"
             />
           </div>
         </Link>
 
-        <ul className="flex gap-5">
+        <ul className="flex gap-5 w-full md:w-auto justify-center md:justify-end">
           {!user && (
             <li>
-              <Link href="/api/auth/login" className="text-white">
+              <Link
+                href="/api/auth/login"
+                className="text-white hover:text-gray-400"
+              >
                 Iniciar Sesión
               </Link>
             </li>
@@ -40,25 +43,36 @@ export default function NavBar() {
           {user && (
             <>
               <li>
-                <Link href="/carrito" className="text-white">
+                <Link
+                  href="/carrito"
+                  className="text-white hover:text-gray-400"
+                >
                   Carrito
                 </Link>
               </li>
               <li>
-                <Link href="/usuario" className="text-white">
+                <Link
+                  href="/usuario"
+                  className="text-white hover:text-gray-400"
+                >
                   Usuario
                 </Link>
               </li>
               <li>
-                <Link href="/api/auth/logout" className="text-white">
-                  Cerrar Sesion
+                <Link
+                  href="/api/auth/logout"
+                  className="text-white hover:text-gray-400"
+                >
+                  Cerrar Sesión
                 </Link>
               </li>
             </>
           )}
 
           <li>
-            <Link href="/contacto">Contacto</Link>
+            <Link href="/contacto" className="text-white hover:text-gray-400">
+              Contacto
+            </Link>
           </li>
         </ul>
       </div>

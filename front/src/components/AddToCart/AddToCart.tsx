@@ -8,9 +8,15 @@ interface ButtonCartProps {
   product: Product;
   quantity: number;
   user?: UserProfile | undefined;
+  onSuccess: () => void;
 }
 
-const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
+const AddToCart: FC<ButtonCartProps> = ({
+  product,
+  quantity,
+  user,
+  onSuccess,
+}) => {
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const userEmail = user?.email;
 
@@ -44,6 +50,7 @@ const AddToCart: FC<ButtonCartProps> = ({ product, quantity, user }) => {
           },
         }
       );
+      onSuccess();
       console.log(sendToCart);
     } catch {
       console.error("no enviado");
