@@ -1,6 +1,6 @@
 .tableContainer {
-    margin-bottom: 16px;
-    /* Espaciado inferior */
+    width: 100%;
+    overflow-x: auto;
 }
 
 .customTable {

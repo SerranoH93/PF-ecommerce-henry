@@ -1,36 +1,29 @@
 import React from 'react';
 import styles from './Table.module.css';
 
-interface Product {
+interface Item {
   id: number;
   name: string;
-  description: string;
-  price: number;
-  stock: number;
-  gender: string;
-  active: boolean;
-  size: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string | null;
+  description?: string;
+  [key: string]: any;
 }
 
-interface Column {
+export interface Column<T> {
   title: string;
-  dataIndex?: keyof Product;
-  render?: (record: Product) => JSX.Element;
+  dataIndex?: keyof T;
+  key: string;
+  render?: (_: any, record: T) => JSX.Element; // Ajustar para que acepte dos parámetros
 }
 
-interface TableProps {
-  data: Product[];
-  columns: Column[];
-  onEdit: (product: Product) => void;
+interface TableProps<T> {
+  data: T[];
+  columns: Column<T>[];
+  onEdit: (item: T) => void;
   onDelete: (id: number) => void;
   onCreate?: () => void;
 }
 
-const TableComponent: React.FC<TableProps> = ({ data, columns, onCreate, onDelete, onEdit }) => {
+const TableComponent = <T extends Item>({ data, columns, onCreate, onDelete, onEdit }: TableProps<T>) => {
   return (
     <div className={styles.tableContainer}>
       {onCreate && (
@@ -44,7 +37,6 @@ const TableComponent: React.FC<TableProps> = ({ data, columns, onCreate, onDelet
             {columns.map((column, index) => (
               <th key={index}>{column.title}</th>
             ))}
-            {/* <th>Acciones</th> */}
           </tr>
         </thead>
         <tbody>
@@ -52,13 +44,9 @@ const TableComponent: React.FC<TableProps> = ({ data, columns, onCreate, onDelet
             <tr key={rowIndex}>
               {columns.map((column, colIndex) => (
                 <td key={colIndex}>
-                  {column.render ? column.render(item) : item[column.dataIndex!]}
+                  {column.render ? column.render(null, item) : item[column.dataIndex!]}
                 </td>
               ))}
-              {/* <td>
-                <button className={styles.actionButton} onClick={() => onEdit(item)}>Editar</button>
-                <button className={styles.actionButton} onClick={() => onDelete(item.id)}>Eliminar</button>
-              </td> */}
             </tr>
           ))}
         </tbody>

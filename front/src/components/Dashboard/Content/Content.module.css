@@ -4,3 +4,9 @@
     min-height: calc(100vh - 64px);
     /* Ajustar según el tamaño del encabezado */
 }
+
+.contentContainer {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+}

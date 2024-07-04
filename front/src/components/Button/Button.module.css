@@ -6,12 +6,12 @@
     font-size: 14px;
 }
 
-.btn-primary {
+.btnPrimary {
     background-color: #1890ff;
     color: #fff;
 }
 
-.btn-danger {
+.btnDanger {
     background-color: #f5222d;
     color: #fff;
 }

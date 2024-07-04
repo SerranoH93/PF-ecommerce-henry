@@ -1,62 +1,91 @@
-"use client"
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ProductSchema } from './productSchema'
-
+import { ProductSchema } from './productSchema';
+import Button from '@/components/Button/Button';
 type ProductFormInputs = {
-    name: string;
-    description: string;
-    price: number;
-    gender: string;
-    stock: number;
-    active: boolean;
-    size: number;
-    images: FileList;
+  id?: number;
+  name: string;
+  description: string;
+  price: number;
+  gender: string;
+  stock: number;
+  active: boolean;
+  size: number | string;
+  images: FileList;
+  categoryId: number;
 };
 
-const CreateProduct: React.FC = () => {
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface CreateProductProps {
+  categories: Category[];
+  onClose: () => void;
+  product?: ProductFormInputs;
+}
+
+const CreateProduct: React.FC<CreateProductProps> = ({ categories, onClose, product }) => {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ProductFormInputs>({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<ProductFormInputs>({
     resolver: zodResolver(ProductSchema),
+    defaultValues: product || {
+      name: '',
+      description: '',
+      price: 0,
+      gender: '',
+      stock: 0,
+      active: true,
+      size: 0,
+      categoryId: 0,
+    },
   });
 
+  useEffect(() => {
+    if (product) {
+      Object.keys(product).forEach(key => {
+        setValue(key as keyof ProductFormInputs, product[key as keyof ProductFormInputs]);
+      });
+    }
+  }, [product, setValue]);
+
   const onSubmit = async (data: ProductFormInputs) => {
-    console.log('onSubmit', data)
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description);
-    formData.append('price' , data.price.toString());
+    formData.append('price', data.price.toString());
     formData.append('gender', data.gender);
     formData.append('stock', data.stock.toString());
-    formData.append('active', data.active?.toString() ?? false);
+    formData.append('active', data.active.toString());
     formData.append('size', data.size.toString());
+    formData.append('categoryId', data.categoryId.toString());
 
     if (data.images && data.images.length > 0) {
       formData.append('images', data.images[0]);
-    } 
+    }
 
-    
     try {
-      const response = await fetch('http://localhost:3002/products/create', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:3002/products/${product?.id ? 'edit' : 'create'}`, {
+        method: product?.id ? 'PUT' : 'POST',
         body: formData,
       });
 
       if (response.ok) {
-        alert('Product created successfully!');
+        alert('Product saved successfully!');
+        onClose();
       } else {
-        alert('Failed to create product');
+        alert('Failed to save product');
       }
     } catch (error) {
-      console.error('Error creating product:', error);
-      alert('Error creating product');
+      console.error('Error saving product:', error);
+      alert('Error saving product');
     }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -67,14 +96,12 @@ const CreateProduct: React.FC = () => {
     }
   };
 
-
   return (
     <div className='flex justify-center flex-col items-center w-full'>
-      {/* <p>{JSON.stringify(errors)}</p>  */}
-      <h1 className='text-5xl text-center my-10 font-black'>Create New Product</h1>
+      <h1 className='text-5xl text-center my-10 font-black'>{product ? 'Edit Product' : 'Create New Product'}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div >
-          <label htmlFor="name" className='block text-xl font-bold '>Name</label>
+        <div>
+          <label htmlFor="name" className='block text-xl font-bold'>Name</label>
           <input id="name" {...register('name')} className='text-black' />
           {errors.name && <p>{errors.name.message}</p>}
         </div>
@@ -91,10 +118,10 @@ const CreateProduct: React.FC = () => {
         <div>
           <label htmlFor="gender" className='block text-xl font-bold'>Gender</label>
           <select id="gender" {...register('gender')} >
-            <option value= "niños" className='text-black'>Niños</option>
-            <option value= "mujeres" className='text-black'>Mujeres</option>
+            <option value="niños" className='text-black'>Niños</option>
+            <option value="mujeres" className='text-black'>Mujeres</option>
             <option value="hombres" className='text-black'>Hombres</option>
-            <option value="unisex" className='text-black'>Accesorios</option> 
+            <option value="unisex" className='text-black'>Accesorios</option>
             <option value="unisex" className='text-black'>Destacados</option>
           </select>
           {errors.gender && <p>{errors.gender.message}</p>}
@@ -104,27 +131,40 @@ const CreateProduct: React.FC = () => {
           <input type="number" id="stock" {...register('stock', { valueAsNumber: true })} className='text-black' />
           {errors.stock && <p>{errors.stock.message}</p>}
         </div>
-            <select  ></select>
+        <div>
+          <label htmlFor="active" className='block text-xl font-bold'>Active</label>
+          <input type="checkbox" id="active" {...register('active')} className='text-black' />
+          {errors.active && <p>{errors.active.message}</p>}
+        </div>
         <div>
           <label htmlFor="size" className='block text-xl font-bold'>Size</label>
           <input type="number" id="size" {...register('size', { valueAsNumber: true })} className='text-black' />
           {errors.size && <p>{errors.size.message}</p>}
         </div>
         <div>
-          <label className='block text-xl font-bold'>Imagen</label>
-          <input type="file" id="images" {...register('images')} onChange={handleImageChange}  />
-          {errors.images && <p>{errors.images.message}</p>}
-          {preview && <img src={preview as string} alt="Image Preview" width="100" />}
+          <label htmlFor="categoryId" className='block text-xl font-bold'>Category</label>
+          <select id="categoryId" {...register('categoryId', { valueAsNumber: true })} className='text-black'>
+            {categories.map(category => (
+              <option key={category.id} value={category.id} className='text-black'>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          {errors.categoryId && <p>{errors.categoryId.message}</p>}
         </div>
-
-        <div className='flex justify-center'>
-          <button type="submit" className='border-2 bg-violet-700 p-3 my-3 font-black uppercase hover:bg-violet-900'>Create Product</button>
+        <div>
+          <label htmlFor="images" className='block text-xl font-bold'>Images</label>
+          <input type="file" id="images" {...register('images')} onChange={handleImageChange} />
+          {errors.images && <p>{errors.images.message}</p>}
+        </div>
+        {preview && <img src={preview as string} alt="Image preview" />}
+        <div>
+          <Button type="submit" onClick={() => {}}>Save Product</Button>
+          <Button type="button" onClick={onClose}>Cancel</Button>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export {CreateProduct}
-
-
+export default CreateProduct;

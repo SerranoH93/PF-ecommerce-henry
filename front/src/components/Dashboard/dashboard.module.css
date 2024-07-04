@@ -1,13 +1,21 @@
-.site-layout .site-layout-background {
-    background: #fff;
-    padding: 24px;
-    min-height: 360px;
+/* Dashboard.css */
+
+.dashboardContainer {
+    display: flex;
+    height: auto;
+    width: auto;
 }
 
-.dashboard {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.contentContainer {
+    flex: 1;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-bottom: 20px;
 }
 
 
@@ -44,6 +52,11 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.tableWrapper {
+    flex: 1;
+    overflow-x: auto;
 }
 
 .modal-content button {
