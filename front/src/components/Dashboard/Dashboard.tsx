@@ -5,7 +5,7 @@ import Sider from './SIDE/Sider';
 import Content from './Content/Content';
 import Button from '@/components/Button/Button';
 import TableComponent, { Column } from '@/components/Table/Table';
-import CreateProduct from '@/components/ProductForm/CreateProduct';
+// import CreateProduct from '@/components/ProductForm/CreateProduct';
 import Modal from './Modal';
 import styles from './dashboard.module.css';
 import CategoryTable from './CategoryTable/CategoryTable';
@@ -240,21 +240,21 @@ const Dashboard: React.FC = () => {
                 />
               </>
             )}
-            {showProductForm && (
+            {/* {showProductForm && (
               <CreateProduct
                 categories={categoriesData}
                 onClose={handleCloseProductForm}
                 product={editingProduct ? transformProductToProductFormInputs(editingProduct) : undefined}
               />
-            )}
-            {showCategoryForm && (
+            )} */}
+            {/* {showCategoryForm && (
               <CreateCategory
                 category={editingCategory}
                 isOpen={showCategoryForm}
                 onClose={handleCloseCategoryForm}
                 onSave={handleSaveCategory}
               />
-            )}
+            )} */}
             {modalImage && (
               <Modal isOpen={!!modalImage} onClose={handleCloseModal}>
                 <img src={modalImage} alt="Producto" />
