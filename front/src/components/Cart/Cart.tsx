@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
+import ButtonPay from "../ButtonPay/ButtonPay";
 
 interface CartProduct {
   id: number;
@@ -177,6 +178,7 @@ const Cart = () => {
                 <h2 className="text-xl font-semibold">Total a Pagar:</h2>
                 <p className="text-xl font-semibold">${totalPrice}</p>
               </div>
+              <ButtonPay cartProducts={cartProducts} totalPrice={totalPrice} />
             </div>
           </div>
         )}
