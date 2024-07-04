@@ -113,32 +113,51 @@ const clearShoppingCart = async (req, res) => {
 
 const createCheckoutSession = async (req, res) => {
     try {
-      const { cartProducts, totalPrice } = req.body;
-  
-      const lineItems = cartProducts.map((product) => ({
-        price_data: {
-          currency: 'usd',
-          product_data: {
+        const { cartProducts, totalPrice } = req.body;
+        console.log("Datos recibidos:", cartProducts, totalPrice); // Log para verificar datos de entrada
+    
+        // Obtener detalles del producto de la base de datos
+        const productDetailsPromises = cartProducts.map(async (cartProduct) => {
+          const product = await Product.findOne({ where: { id: cartProduct.product_id } });
+          return {
             name: product.name,
-            images: [product.image],
+            image: product.image,
+            price: product.price,
+            quantity: cartProduct.quantity,
+          };
+        });
+    
+        const productDetails = await Promise.all(productDetailsPromises);
+    
+        const lineItems = productDetails.map((product) => ({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              images: [product.image],
+            },
+            unit_amount: product.price, // Asegúrate de que el precio está en centavos
           },
-          unit_amount: product.price,
-        },
-        quantity: product.quantity,
-      }));
-  
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel',
-      });
-  
-      res.status(200).json({ sessionId: session.id });
-    } catch (error) {
-      res.status(500).json({ message: 'Error in creating checkout session', error: error.message });
-    }
+          quantity: product.quantity,
+        }));
+    
+        console.log("Line Items:", lineItems); // Log para verificar lineItems
+    
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: lineItems,
+          mode: 'payment',
+          success_url: 'http://localhost:3000/success',
+          cancel_url: 'http://localhost:3000/cancel',
+        });
+    
+        console.log("Session creada:", session); // Log para verificar la sesión creada
+    
+        res.status(200).json({ sessionId: session.id });
+      } catch (error) {
+        console.error("Error en createCheckoutSession:", error); // Log de errores detallados
+        res.status(500).json({ message: 'Error en la creación de la sesión de pago', error: error.message });
+      }
   };
 
 module.exports = {

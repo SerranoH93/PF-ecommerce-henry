@@ -24,6 +24,8 @@ const ButtonPay = ({ cartProducts, totalPrice }: ButtonPayProps) => {
         const { error } = await stripe.redirectToCheckout({ sessionId });
         if (error) {
           console.error("Error in redirecting to checkout:", error);
+        } else {
+          const clearCart = await axios.delete("http://localhost:3002/order/deleteAll")
         }
       }
     } catch (error) {

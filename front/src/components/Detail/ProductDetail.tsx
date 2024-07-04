@@ -129,6 +129,8 @@ const ProductDetail: React.FC = () => {
             user={user}
             onSuccess={handleAddToCartSuccess}
           />
+          <br />
+          <StripeCheckout product={product} />
         </div>
       </div>
       <div className="container mx-auto p-4">
