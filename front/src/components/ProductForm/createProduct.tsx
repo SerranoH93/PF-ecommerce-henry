@@ -59,9 +59,9 @@ const CreateProduct: React.FC<CreateProductProps> = ({ categories, onClose, prod
     formData.append('price', data.price.toString());
     formData.append('gender', data.gender);
     formData.append('stock', data.stock.toString());
-    formData.append('active', data.active.toString());
+    formData.append('active', (data.active ?? true).toString());
     formData.append('size', data.size.toString());
-    formData.append('categoryId', data.categoryId.toString());
+    formData.append('categoryId', data.name)
 
     if (data.images && data.images.length > 0) {
       formData.append('images', data.images[0]);
@@ -145,7 +145,7 @@ const CreateProduct: React.FC<CreateProductProps> = ({ categories, onClose, prod
           <label htmlFor="categoryId" className='block text-xl font-bold'>Category</label>
           <select id="categoryId" {...register('categoryId', { valueAsNumber: true })} className='text-black'>
             {categories.map(category => (
-              <option key={category.id} value={category.id} className='text-black'>
+              <option key={category.id} value={category.name} className='text-black'>
                 {category.name}
               </option>
             ))}
