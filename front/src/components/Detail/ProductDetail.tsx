@@ -117,7 +117,6 @@ const ProductDetail: React.FC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-lg">Precio: ${product.price}</p>
-            <p className="text-lg">Talle: {product.size}</p>
             <p className="text-lg">Género: {product.gender}</p>
             <p className="text-lg">Stock: {product.stock}</p>
           </div>
@@ -132,7 +131,7 @@ const ProductDetail: React.FC = () => {
       </div>
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 text-center text-white">
-          All Reviews
+          Opiniones del producto
         </h1>
         <ul className="space-y-4">
           {reviews.map((item) => (
