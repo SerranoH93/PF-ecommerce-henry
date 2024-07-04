@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import styles from './ProductDetail.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import StripeCheckout from '../ButtonBuy/StripeCheckout';
 
 export interface Product {
   id: string;
@@ -107,7 +107,7 @@ const ProductDetail: React.FC = () => {
           className="object-cover rounded-md"
         />
       </div>
-      <div className={styles.productInfo}>
+      <div>
         <h1>Detalle del Producto</h1>
         <h1>{product.name}</h1>
         <p>{product.description}</p>
@@ -115,7 +115,8 @@ const ProductDetail: React.FC = () => {
         <p>Talle: {product.size}</p>
         <p>Género: {product.gender}</p>
         <p>Stock: {product.stock}</p>
-        <AddToCart product={product} quantity={quantity} user={user}/>
+        <AddToCart product={product} quantity={quantity} user={user} />
+        <StripeCheckout product={product}/>
       </div>
     </div>
   );

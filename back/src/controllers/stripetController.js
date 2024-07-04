@@ -15,7 +15,7 @@ const processPayment = async (req, res) => {
                         product_data: {
                             name: 'Producto',  // Nombre del producto
                         },
-                        unit_amount: amount * 100,  // Monto en centavos (ej. $10.00 = 1000 centavos)
+                        unit_amount: amount,  // Monto en centavos (ej. $10.00 = 1000 centavos)
                     },
                     quantity: 1,  // Cantidad del producto
                 },

@@ -1,6 +1,8 @@
+require("dotenv").config;
 const { Sequelize, where } = require('sequelize');
 const { Product, ShoppingCart, User } = require('../db');
-
+const path = require("path");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const getAllOrders = async (req, res) => {
     try {
@@ -109,10 +111,41 @@ const clearShoppingCart = async (req, res) => {
     }
 }
 
+const createCheckoutSession = async (req, res) => {
+    try {
+      const { cartProducts, totalPrice } = req.body;
+  
+      const lineItems = cartProducts.map((product) => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: product.name,
+            images: [product.image],
+          },
+          unit_amount: product.price,
+        },
+        quantity: product.quantity,
+      }));
+  
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: lineItems,
+        mode: 'payment',
+        success_url: 'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cancel',
+      });
+  
+      res.status(200).json({ sessionId: session.id });
+    } catch (error) {
+      res.status(500).json({ message: 'Error in creating checkout session', error: error.message });
+    }
+  };
+
 module.exports = {
     getAllOrders,
     addProduct,
     setQuantity,
     deleteOrder,
-    clearShoppingCart
+    clearShoppingCart,
+    createCheckoutSession,
     };
