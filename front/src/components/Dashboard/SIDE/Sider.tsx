@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Sider.module.css';
 
 interface SiderProps {
-  handleMenuClick: (key: string) => void;
+  handleMenuClick: (key: 'products' | 'categories') => void;
 }
 
 const Sider: React.FC<SiderProps> = ({ handleMenuClick }) => {
