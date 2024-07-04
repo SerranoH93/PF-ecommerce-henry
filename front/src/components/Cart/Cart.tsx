@@ -45,12 +45,9 @@ const Cart = () => {
         const userData = userResponse.data;
         const userId = userData.id;
 
-<<<<<<< HEAD
-        // Obtener el carrito del usuario usando su ID
         const linkGetCartProducts = `https://pf-ecommerce-henry.onrender.com/order/?id=${userId}`;
-=======
-        const linkGetCartProducts = `http://localhost:3002/order/?id=${userId}`;
->>>>>>> developer
+
+
 
         const cartResponse = await axios.get(linkGetCartProducts);
         const cartProducts = cartResponse.data;
