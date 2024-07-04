@@ -1,0 +1,78 @@
+/* Dashboard.css */
+
+.dashboardContainer {
+    display: flex;
+    height: auto;
+    width: auto;
+}
+
+.contentContainer {
+    flex: 1;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-bottom: 20px;
+}
+
+
+/* Estilos básicos para el modal */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 500px;
+    max-width: 80%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content input {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.tableWrapper {
+    flex: 1;
+    overflow-x: auto;
+}
+
+.modal-content button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:first-of-type {
+    background-color: #4caf50;
+    color: white;
+}
+
+.modal-content button:last-of-type {
+    background-color: #f44336;
+    color: white;
+}

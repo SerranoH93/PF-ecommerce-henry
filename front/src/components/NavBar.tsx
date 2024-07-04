@@ -6,6 +6,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import axios from "axios";
 import { useEffect } from "react";
 
+
 export default function NavBar() {
   const { user } = useUser();
 
