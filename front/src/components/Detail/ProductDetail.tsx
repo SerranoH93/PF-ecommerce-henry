@@ -1,10 +1,9 @@
-'use client'
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-
-import AddToCart from '../AddToCart/AddToCart';
-import { useUser } from '@auth0/nextjs-auth0/client';
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import AddToCart from "../AddToCart/AddToCart";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export interface Product {
   id: string;
@@ -130,15 +129,32 @@ const ProductDetail: React.FC = () => {
           />
         </div>
       </div>
-      <div className={styles.productInfo}>
-        <h1>Detalle del Producto</h1>
-        <h1>{product.name}</h1>
-        <p>{product.description}</p>
-        <p>Precio: ${product.price}</p>
-        <p>Talle: {product.size}</p>
-        <p>Género: {product.gender}</p>
-        <p>Stock: {product.stock}</p>
-        <AddToCart product={product} quantity={quantity} user={user}/>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4 text-center text-white">
+          Opiniones del producto
+        </h1>
+        <ul className="space-y-4">
+          {reviews.map((item) => (
+            <li
+              key={item.id}
+              className="p-4 bg-gray-700 rounded-lg shadow-lg text-white space-y-5"
+            >
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <h2 className="text-xl font-semibold">{item.name}</h2>
+                <p className="mt-2 md:mt-0">
+                  <strong>Fecha:</strong> {new Date(item.date).toLocaleString()}
+                </p>
+              </div>
+              <p>
+                <strong>Comentario:</strong> {item.comentario}
+              </p>
+              <p className="text-end">
+                <strong>Calificación:</strong> {item.calificacion}{" "}
+                <span>/100</span>
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
