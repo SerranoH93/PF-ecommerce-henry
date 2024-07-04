@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
+import ButtonPay from "../ButtonPay/ButtonPay";
 
 interface CartProduct {
   id: number;
@@ -37,7 +38,6 @@ const Cart = () => {
 
     const fetchCartProducts = async () => {
       try {
-        // Obtener el usuario de la base de datos usando el correo electrónico
         const userEmail = user.email;
         const userResponse = await axios.get(
           `https://pf-ecommerce-henry.onrender.com/user/by-email?email=${userEmail}`
@@ -45,14 +45,17 @@ const Cart = () => {
         const userData = userResponse.data;
         const userId = userData.id;
 
+<<<<<<< HEAD
         // Obtener el carrito del usuario usando su ID
         const linkGetCartProducts = `https://pf-ecommerce-henry.onrender.com/order/?id=${userId}`;
+=======
+        const linkGetCartProducts = `http://localhost:3002/order/?id=${userId}`;
+>>>>>>> developer
 
         const cartResponse = await axios.get(linkGetCartProducts);
         const cartProducts = cartResponse.data;
         setCartProducts(cartProducts);
 
-        // Obtener los detalles de cada producto en el carrito
         const productRequests = cartProducts.map((cartProduct: CartProduct) =>
           axios.get(`https://pf-ecommerce-henry.onrender.com/products/${cartProduct.product_id}`)
         );
@@ -69,7 +72,6 @@ const Cart = () => {
   }, [user]);
 
   useEffect(() => {
-    // Calcular el total de la compra cuando cambien los productos o el carrito
     const calculateTotalPrice = () => {
       const totalPrice = products.reduce((acc, product, index) => {
         const cartProduct = cartProducts[index];
@@ -92,7 +94,7 @@ const Cart = () => {
       id: cartProduct.id,
       name,
       price,
-      image: images[0], // Suponiendo que siempre tomamos la primera imagen
+      image: images[0],
       quantity: cartProduct.quantity,
     };
   };
@@ -104,11 +106,13 @@ const Cart = () => {
         `https://pf-ecommerce-henry.onrender.com/order/delete/${productId}`
       );
       if (deleteProductResponse.status === 200) {
-        // Actualizar la lista de productos en el carrito después de la eliminación
         const updatedCartProducts = cartProducts.filter(
           (product) => product.product_id !== productId
         );
         setCartProducts(updatedCartProducts);
+
+        // Recargar la página después de eliminar un producto
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error al eliminar el producto del carrito", error);
@@ -179,15 +183,16 @@ const Cart = () => {
                 <h2 className="text-xl font-semibold">Total a Pagar:</h2>
                 <p className="text-xl font-semibold">${totalPrice}</p>
               </div>
+              <ButtonPay cartProducts={cartProducts} totalPrice={totalPrice} />
             </div>
           </div>
         )}
 
         {products.length === 0 && (
           <div>
-            <p>no hay productos en el Carrito</p>
+            <p>No hay productos en el Carrito</p>
             <Link href="/">
-              <p className="text-lg">Seguir comprando</p>
+              <p className="text-lg text-indigo-500">Seguir comprando</p>
             </Link>
           </div>
         )}

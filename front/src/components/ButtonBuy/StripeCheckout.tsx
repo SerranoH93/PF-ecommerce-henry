@@ -23,7 +23,11 @@ const CheckoutForm: React.FC<StripeCheckoutProps> = ({ product }) => {
         if (!stripe) return;
 
         try {
+<<<<<<< HEAD:front/src/components/ButtonPay/StripeCheckout.tsx
             const response = await fetch('https://pf-ecommerce-henry.onrender.com/create-checkout-session', {
+=======
+            const response = await fetch('http://localhost:3002/create-session', {
+>>>>>>> developer:front/src/components/ButtonBuy/StripeCheckout.tsx
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +58,7 @@ const CheckoutForm: React.FC<StripeCheckoutProps> = ({ product }) => {
 
     return (
         <div>
-            <button onClick={handleClick}>Comprar</button>
+            <button onClick={handleClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Comprar</button>
         </div>
     );
 };
