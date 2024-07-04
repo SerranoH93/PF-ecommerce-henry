@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import styles from './ProductDetail.module.css';
+
 import AddToCart from '../AddToCart/AddToCart';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
