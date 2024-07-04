@@ -97,15 +97,38 @@ const ProductDetail: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row items-start border-4 border-black p-6 rounded-lg max-w-4xl mx-auto my-10 bg-gray-800 shadow-lg">
-      <div className="w-full md:w-1/2 mb-6 md:mb-0">
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          width={300}
-          height={300}
-          className="object-cover rounded-md"
-        />
+    <div>
+      {successMessage && (
+        <p className="text-green-500 text-center mb-4">{successMessage}</p>
+      )}
+      <div className="flex flex-col md:flex-row items-start border-4 border-black p-6 rounded-lg max-w-4xl mx-auto my-10 bg-gray-800 shadow-lg">
+        <div className="w-full md:w-1/2 mb-6 md:mb-0">
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            width={300}
+            height={300}
+            className="object-cover rounded-md"
+          />
+        </div>
+        <div className="flex-1 text-white flex flex-col justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+            <p className="mb-2">{product.description}</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-lg">Precio: ${product.price}</p>
+            <p className="text-lg">Género: {product.gender}</p>
+            <p className="text-lg">Stock: {product.stock}</p>
+          </div>
+          <br />
+          <AddToCart
+            product={product}
+            quantity={quantity}
+            user={user}
+            onSuccess={handleAddToCartSuccess}
+          />
+        </div>
       </div>
       <div className={styles.productInfo}>
         <h1>Detalle del Producto</h1>

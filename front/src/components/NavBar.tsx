@@ -15,6 +15,8 @@ export default function NavBar() {
     }
   }, [user]);
 
+  const userAdmin = user?.email;
+
   return (
     <nav className="mt-3">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between bg-black px-6 py-4">
@@ -29,6 +31,16 @@ export default function NavBar() {
         </Link>
 
         <ul className="flex gap-5 w-full md:w-auto justify-center md:justify-end">
+          {userAdmin === "modaurbana45@gmail.com" && (
+            <li>
+              <Link
+                href="/dashboard"
+                className="text-white hover:text-gray-400"
+              >
+                Panel de control
+              </Link>
+            </li>
+          )}
           {!user && (
             <li>
               <Link
