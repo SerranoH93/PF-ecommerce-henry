@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Sider from './SIDE/Sider';
 import Content from './Content/Content';
@@ -12,7 +12,7 @@ import CategoryTable from './CategoryTable/CategoryTable';
 import CreateCategory from './CreateCategory/CreateCategory';
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -24,7 +24,7 @@ interface Product {
   createdAt: string;
   updatedAt: string;
   deletedAt?: string | null;
-  categoryId: number;
+  category: string;
 }
 
 interface Category {
@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
     setEditingProduct(null);
   };
 
-  const handleDeleteProduct = (id: number) => {
+  const handleDeleteProduct = (id: string) => {
     fetch(`http://localhost:3002/products/delete/${id}`, { method: 'DELETE' })
       .then(() => {
         setProductsData(productsData.filter(product => product.id !== id));
@@ -135,6 +135,39 @@ const Dashboard: React.FC = () => {
     setModalImage(null);
   };
 
+  const transformProductToProductFormInputs = (editingProduct: Product | null): {
+    id?: string;
+    name: string;
+    description: string;
+    price: number;
+    gender: string;
+    stock: number;
+    active: boolean;
+    size: string | number;
+    images: FileList;
+    category: string;
+  } | undefined => {
+    if (!editingProduct) {
+      return undefined;
+    }
+
+    // Simplemente inicializamos las imágenes como un FileList vacío
+    const emptyFileList = new FileList();
+
+    return {
+      id: editingProduct.id,
+      name: editingProduct.name,
+      description: editingProduct.description,
+      price: editingProduct.price,
+      gender: editingProduct.gender,
+      stock: editingProduct.stock,
+      active: editingProduct.active,
+      size: editingProduct.size,
+      images: emptyFileList,
+      category: editingProduct.category,
+    };
+  };
+
   const productColumns: Column<Product>[] = [
     { title: 'ID', dataIndex: 'id', key: 'id' },
     { title: 'Nombre', dataIndex: 'name', key: 'name' },
@@ -142,7 +175,7 @@ const Dashboard: React.FC = () => {
     { title: 'Precio', dataIndex: 'price', key: 'price' },
     { title: 'Stock', dataIndex: 'stock', key: 'stock' },
     { title: 'Género', dataIndex: 'gender', key: 'gender' },
-    { title: 'Activo', dataIndex: 'active', key: 'active', render: (text, record) => <span>{record.active ? 'Yes' : 'No'}</span> },
+    { title: 'Activo', dataIndex: 'active', key: 'active', render: (text, record) => <span>{record.active ? 'Sí' : 'No'}</span> },
     { title: 'Tamaño', dataIndex: 'size', key: 'size' },
     { 
       title: 'Imágenes', 
@@ -151,15 +184,15 @@ const Dashboard: React.FC = () => {
         <div>
           {record.images && record.images.length > 0 ? (
             record.images.map((image, index) => (
-              <a key={index} href="#" onClick={() => handleOpenModal(image)}>Link de imagen</a>
+              <a key={index} href="#" onClick={() => handleOpenModal(image)}>Ver imagen</a>
             ))
           ) : (
-            <span>No images available</span>
+            <span>No hay imágenes disponibles</span>
           )}
         </div>
       ),
     },
-    { title: 'Categoría ID', dataIndex: 'categoryId', key: 'categoryId' },
+    { title: 'ID de Categoría', dataIndex: 'category', key: 'categoryId' },
     { title: 'Creado en', dataIndex: 'createdAt', key: 'createdAt' },
     { title: 'Actualizado en', dataIndex: 'updatedAt', key: 'updatedAt' },
     {
@@ -173,10 +206,6 @@ const Dashboard: React.FC = () => {
       ),
     },
   ];
-
-  function transformProductToProductFormInputs(editingProduct: Product): { id?: number | undefined; name: string; description: string; price: number; gender: string; stock: number; active: boolean; size: string | number; images: FileList; categoryId: number; } | undefined {
-    throw new Error('Function not implemented.');
-  }
 
   return (
     <Router>
@@ -228,7 +257,7 @@ const Dashboard: React.FC = () => {
             )}
             {modalImage && (
               <Modal isOpen={!!modalImage} onClose={handleCloseModal}>
-                <img src={modalImage} alt="Product" />
+                <img src={modalImage} alt="Producto" />
               </Modal>
             )}
           </Content>

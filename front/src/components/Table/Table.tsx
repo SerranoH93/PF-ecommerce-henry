@@ -2,28 +2,32 @@ import React from 'react';
 import styles from './Table.module.css';
 
 interface Item {
-  id: number;
+  id: string;
   name: string;
   description?: string;
   [key: string]: any;
+}
+
+interface CategoryItem extends Item {
+  id: string; // Cambiamos el tipo de 'id' a 'string'
 }
 
 export interface Column<T> {
   title: string;
   dataIndex?: keyof T;
   key: string;
-  render?: (_: any, record: T) => JSX.Element; // Ajustar para que acepte dos parámetros
+  render?: (_: any, record: T) => JSX.Element; 
 }
 
 interface TableProps<T> {
   data: T[];
   columns: Column<T>[];
   onEdit: (item: T) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
   onCreate?: () => void;
 }
 
-const TableComponent = <T extends Item>({ data, columns, onCreate, onDelete, onEdit }: TableProps<T>) => {
+const TableComponent = <T extends Item | CategoryItem>({ data, columns, onCreate, onDelete, onEdit }: TableProps<T>) => {
   return (
     <div className={styles.tableContainer}>
       {onCreate && (
@@ -44,7 +48,7 @@ const TableComponent = <T extends Item>({ data, columns, onCreate, onDelete, onE
             <tr key={rowIndex}>
               {columns.map((column, colIndex) => (
                 <td key={colIndex}>
-                  {column.render ? column.render(null, item) : item[column.dataIndex!]}
+                  {column.render ? column.render(null, item) : item[column.dataIndex!]?.toString()}
                 </td>
               ))}
             </tr>

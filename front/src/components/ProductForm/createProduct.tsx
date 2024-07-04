@@ -1,10 +1,11 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ProductSchema } from './productSchema';
 import Button from '@/components/Button/Button';
 type ProductFormInputs = {
-  id?: number;
+  id?: string;
   name: string;
   description: string;
   price: number;
@@ -13,7 +14,7 @@ type ProductFormInputs = {
   active: boolean;
   size: number | string;
   images: FileList;
-  categoryId: number;
+  category: string;
 };
 
 interface Category {
@@ -40,7 +41,7 @@ const CreateProduct: React.FC<CreateProductProps> = ({ categories, onClose, prod
       stock: 0,
       active: true,
       size: 0,
-      categoryId: 0,
+      category:'',
     },
   });
 
@@ -142,15 +143,15 @@ const CreateProduct: React.FC<CreateProductProps> = ({ categories, onClose, prod
           {errors.size && <p>{errors.size.message}</p>}
         </div>
         <div>
-          <label htmlFor="categoryId" className='block text-xl font-bold'>Category</label>
-          <select id="categoryId" {...register('categoryId', { valueAsNumber: true })} className='text-black'>
+          <label htmlFor="category" className='block text-xl font-bold'>Category</label>
+          <select id="category" {...register('category')} className='text-black'>
             {categories.map(category => (
-              <option key={category.id} value={category.name} className='text-black'>
+              <option key={category.name} value={category.name} className='text-black'>
                 {category.name}
               </option>
             ))}
           </select>
-          {errors.categoryId && <p>{errors.categoryId.message}</p>}
+          {errors.category && <p>{errors.category.message}</p>}
         </div>
         <div>
           <label htmlFor="images" className='block text-xl font-bold'>Images</label>
