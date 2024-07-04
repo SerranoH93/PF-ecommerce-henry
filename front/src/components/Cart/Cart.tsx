@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import Link from "next/link";
 
 interface CartProduct {
   id: number;
@@ -25,17 +27,29 @@ interface MappedProduct {
 }
 
 const Cart = () => {
+  const { user } = useUser();
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
-    const fetchCartProducts = async () => {
-      const linkGetCartProducts = "http://localhost:3002/order";
+    if (!user) return;
 
+    const fetchCartProducts = async () => {
       try {
-        const response = await axios.get(linkGetCartProducts);
-        const cartProducts = response.data;
+        // Obtener el usuario de la base de datos usando el correo electrónico
+        const userEmail = user.email;
+        const userResponse = await axios.get(
+          `http://localhost:3002/user/by-email?email=${userEmail}`
+        );
+        const userData = userResponse.data;
+        const userId = userData.id;
+
+        // Obtener el carrito del usuario usando su ID
+        const linkGetCartProducts = `http://localhost:3002/order/?id=${userId}`;
+
+        const cartResponse = await axios.get(linkGetCartProducts);
+        const cartProducts = cartResponse.data;
         setCartProducts(cartProducts);
 
         // Obtener los detalles de cada producto en el carrito
@@ -52,7 +66,7 @@ const Cart = () => {
     };
 
     fetchCartProducts();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     // Calcular el total de la compra cuando cambien los productos o el carrito
@@ -82,6 +96,28 @@ const Cart = () => {
       quantity: cartProduct.quantity,
     };
   };
+
+  const handleDeleteProduct = async (productId: string) => {
+    console.log(productId);
+    try {
+      const deleteProductResponse = await axios.delete(
+        `http://localhost:3002/order/delete/${productId}`
+      );
+      if (deleteProductResponse.status === 200) {
+        // Actualizar la lista de productos en el carrito después de la eliminación
+        const updatedCartProducts = cartProducts.filter(
+          (product) => product.product_id !== productId
+        );
+        setCartProducts(updatedCartProducts);
+      }
+    } catch (error) {
+      console.error("Error al eliminar el producto del carrito", error);
+    }
+  };
+
+  if (!user) {
+    return <p className="text-lg">Loading...</p>;
+  }
 
   return (
     <div className="bg-black text-white min-h-screen p-8">
@@ -127,6 +163,14 @@ const Cart = () => {
                       </p>
                     </div>
                   </div>
+                  <button
+                    onClick={() =>
+                      handleDeleteProduct(mappedProduct.id.toString())
+                    }
+                    className="text-sm text-red-600 hover:text-red-700 font-semibold py-1 px-2 rounded focus:outline-none focus:shadow-outline mt-2"
+                  >
+                    Eliminar
+                  </button>
                 </div>
               );
             })}
@@ -139,7 +183,14 @@ const Cart = () => {
           </div>
         )}
 
-        {products.length === 0 && <p className="text-lg">Loading...</p>}
+        {products.length === 0 && (
+          <div>
+            <p>no hay productos en el Carrito</p>
+            <Link href="/">
+              <p className="text-lg">Seguir comprando</p>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

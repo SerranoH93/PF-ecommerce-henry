@@ -1,10 +1,10 @@
-"use client";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useParams } from "next/navigation";
-import AddToCart from "../AddToCart/AddToCart";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import StripeCheckout from "../ButtonPay/StripeCheckout";
+'use client'
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useParams } from 'next/navigation';
+import styles from './ProductDetail.module.css';
+import AddToCart from '../AddToCart/AddToCart';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export interface Product {
   id: string;
@@ -17,13 +17,25 @@ export interface Product {
   gender: string;
 }
 
+export interface Review {
+  name: string;
+  date: string;
+  comentario: string;
+  calificacion: number;
+  id: string;
+}
+
 const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { id } = useParams();
   const { user } = useUser();
   const quantity = 1;
+
+  console.log(id);
 
   useEffect(() => {
     if (id) {
@@ -45,6 +57,32 @@ const ProductDetail: React.FC = () => {
       fetchProduct();
     }
   }, [id]);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        const response = await fetch(
+          `https://65ea5569c9bf92ae3d3b6591.mockapi.io/api/v1/event`
+        );
+        if (!response.ok) {
+          throw new Error("La respuesta de la red no fue satisfactoria");
+        }
+        const data: Review[] = await response.json();
+        setReviews(data);
+      } catch (error) {
+        setError("Error al obtener el review");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReview();
+  }, []);
+
+  const handleAddToCartSuccess = () => {
+    setSuccessMessage("Producto agregado al carrito");
+    setTimeout(() => setSuccessMessage(null), 3000); // El mensaje desaparece después de 3 segundos
+  };
 
   if (loading) {
     return <p className="text-white">Cargando...</p>;
@@ -69,20 +107,15 @@ const ProductDetail: React.FC = () => {
           className="object-cover rounded-md"
         />
       </div>
-      <div className="flex-1 text-white flex flex-col justify-between">
-        <div>
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <p className="mb-2">{product.description}</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-lg">Precio: ${product.price}</p>
-          <p className="text-lg">Talle: {product.size}</p>
-          <p className="text-lg">Género: {product.gender}</p>
-          <p className="text-lg">Stock: {product.stock}</p>
-        </div>
-        <br />
-        <AddToCart product={product} quantity={quantity} user={user} />
-        <StripeCheckout product={product}/>
+      <div className={styles.productInfo}>
+        <h1>Detalle del Producto</h1>
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
+        <p>Precio: ${product.price}</p>
+        <p>Talle: {product.size}</p>
+        <p>Género: {product.gender}</p>
+        <p>Stock: {product.stock}</p>
+        <AddToCart product={product} quantity={quantity} user={user}/>
       </div>
     </div>
   );
