@@ -15,14 +15,14 @@ const processPayment = async (req, res) => {
                         product_data: {
                             name: 'Producto',  // Nombre del producto
                         },
-                        unit_amount: amount * 100,  // Monto en centavos (ej. $10.00 = 1000 centavos)
+                        unit_amount: amount,  // Monto en centavos (ej. $10.00 = 1000 centavos)
                     },
                     quantity: 1,  // Cantidad del producto
                 },
             ],
             mode: 'payment',
-            success_url: 'http://localhost:3000/success',  // URL de éxito después de la compra
-            cancel_url: 'http://localhost:3000/cancel',  // URL de cancelación
+            success_url: 'https://moda-urbana-henry.vercel.app/success',  // URL de éxito después de la compra
+            cancel_url: 'https://moda-urbana-henry.vercel.app/cancel',  // URL de cancelación
         });
 
         res.json({ id: session.id });

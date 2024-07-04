@@ -1,6 +1,8 @@
+require("dotenv").config;
 const { Sequelize, where } = require('sequelize');
 const { Product, ShoppingCart, User } = require('../db');
-
+const path = require("path");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const getAllOrders = async (req, res) => {
     try {
@@ -109,10 +111,60 @@ const clearShoppingCart = async (req, res) => {
     }
 }
 
+const createCheckoutSession = async (req, res) => {
+    try {
+        const { cartProducts, totalPrice } = req.body;
+        console.log("Datos recibidos:", cartProducts, totalPrice); // Log para verificar datos de entrada
+    
+        // Obtener detalles del producto de la base de datos
+        const productDetailsPromises = cartProducts.map(async (cartProduct) => {
+          const product = await Product.findOne({ where: { id: cartProduct.product_id } });
+          return {
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            quantity: cartProduct.quantity,
+          };
+        });
+    
+        const productDetails = await Promise.all(productDetailsPromises);
+    
+        const lineItems = productDetails.map((product) => ({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              images: [product.image],
+            },
+            unit_amount: product.price, // Asegúrate de que el precio está en centavos
+          },
+          quantity: product.quantity,
+        }));
+    
+        console.log("Line Items:", lineItems); // Log para verificar lineItems
+    
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: lineItems,
+          mode: 'payment',
+          success_url: 'https://moda-urbana-henry.vercel.app/success',
+          cancel_url: 'https://moda-urbana-henry.vercel.app/cancel',
+        });
+    
+        console.log("Session creada:", session); // Log para verificar la sesión creada
+    
+        res.status(200).json({ sessionId: session.id });
+      } catch (error) {
+        console.error("Error en createCheckoutSession:", error); // Log de errores detallados
+        res.status(500).json({ message: 'Error en la creación de la sesión de pago', error: error.message });
+      }
+  };
+
 module.exports = {
     getAllOrders,
     addProduct,
     setQuantity,
     deleteOrder,
-    clearShoppingCart
+    clearShoppingCart,
+    createCheckoutSession,
     };
