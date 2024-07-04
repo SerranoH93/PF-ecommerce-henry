@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 require('dotenv').config
 const Stripe = require('stripe')
 const {API_SERVER} = process.env;
@@ -10,7 +8,7 @@ const postPay = async (req, res) => {
   try {
     const body = await req.json()
     const session = await stripe.checkout.session.Create({
-      seccess_url:"http://localhost:3000/success",
+      seccess_url:"http://localhost:3002/success",
       line_items:[{
         price_data:{
           currency: "usd",
@@ -37,6 +35,5 @@ const postPay = async (req, res) => {
 }
 
 module.exports = {
-  postPay
+  postPay,
 }
->>>>>>> developer

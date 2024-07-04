@@ -16,13 +16,23 @@ export interface Product {
   gender: string;
 }
 
+export interface Review {
+  name: string;
+  date: string;
+  comentario: string;
+  calificacion: number;
+  id: string;
+}
+
 const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { id } = useParams();
   const { user } = useUser();
   const quantity = 1;
+ 
  console.log(id)
 
   useEffect(() => {
@@ -46,6 +56,27 @@ const ProductDetail: React.FC = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    
+      const fetchReview = async () => {
+        try {
+          const response = await fetch(`https://65ea5569c9bf92ae3d3b6591.mockapi.io/api/v1/event`);
+          if (!response.ok) {
+            throw new Error("La respuesta de la red no fue satisfactoria");
+          }
+          const data: Review[] = await response.json();
+          setReviews(data);
+        } catch (error) {
+          setError("Error al obtener el review");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchReview();
+    
+  }, []);
+
   if (loading) {
     return <p className="text-white">Cargando...</p>;
   }
@@ -58,10 +89,13 @@ const ProductDetail: React.FC = () => {
     return <p className="text-red-500">Error: Producto no encontrado</p>;
   }
 
-  
+ 
 
+ 
   
   return (
+    <div>
+
     <div className="flex flex-col md:flex-row items-start border-4 border-black p-6 rounded-lg max-w-4xl mx-auto my-10 bg-gray-800 shadow-lg">
       <div className="w-full md:w-1/2 mb-6 md:mb-0">
         <Image
@@ -82,11 +116,30 @@ const ProductDetail: React.FC = () => {
           <p className="text-lg">Talle: {product.size}</p>
           <p className="text-lg">Género: {product.gender}</p>
           <p className="text-lg">Stock: {product.stock}</p>
+          
         </div>
         <br />
-        <AddToCart product={product} quantity={quantity} user={user} />
+        <AddToCart product={product} quantity={quantity} user={user} />       
+        
       </div>
-     
+
+    </div>
+        <div className="container mx-auto p-4 block w-1/2">
+            <h1 className="text-2xl font-bold mb-4 text-center">All Reviews</h1>
+            <ul className="space-y-4">
+                {reviews.map(item => (
+                  <li key={item.id} className="p-4 bg-gray-100 rounded shadow text-black space-y-5">
+                        <div className="flex justify-between">
+                          <h2 className="text-xl font-semibold">{item.name}</h2>
+                          <p><strong>Fecha:</strong> {new Date(item.date).toLocaleString()}</p>
+                        </div>
+                        <p><strong>Comentario:</strong> {item.comentario}</p>
+                        <p className="text-end"><strong>Calificación:</strong> {item.calificacion} <span>/100</span></p>
+                    </li>
+                ))}
+            </ul>
+        </div>
+      
     </div>
   );
 };
